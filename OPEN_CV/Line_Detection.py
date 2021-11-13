@@ -43,6 +43,6 @@ line_segments = cv2.HoughLinesP(cropped_edges, rho, angle, min_threshold, #outpu
 
 #drawing line 
 
-
+#ok ok
 cv2.imshow("Input",cropped_edges)
 cv2.waitKey(0)
