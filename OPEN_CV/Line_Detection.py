@@ -81,6 +81,7 @@ left_fit_average = np.average(left_fit, axis=0)
 if len(left_fit) > 0:
 	lane_lines.append(make_points(frame, left_fit_average))
 
+<<<<<<< HEAD
 right_fit_average = np.average(right_fit, axis=0)
 if len(right_fit) > 0:
     lane_lines.append(make_points(frame, right_fit_average))
@@ -88,4 +89,8 @@ if len(right_fit) > 0:
 logging.debug('lane lines: %s' % lane_lines)  # [[[316, 720, 484, 432]], [[1009, 720, 718, 432]]]
 cv2.imshow("Input",lane_lines)
 #cv2.imshow("Input",cropped_edges)
+=======
+#ok ok
+cv2.imshow("Input",cropped_edges)
+>>>>>>> 4298bdbcec053ec2f1737962dcefe023539a8bdc
 cv2.waitKey(0)
