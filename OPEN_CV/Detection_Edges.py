@@ -4,7 +4,7 @@ import cv2
 
 def detection_edges(frame):
 	#import piture
-	frame = cv2.imread('F:/FH_Kiel/Projekt/Autonomous_Car/line.jpg')
+	frame = cv2.imread('./line.jpg')
 	hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
 
 
