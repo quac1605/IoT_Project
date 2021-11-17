@@ -10,7 +10,7 @@ hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
 
 #define white range
 lower_white = np.array([0,0,0])
-upper_white = np.array([0,0,255])
+upper_white = np.array([10,10,255])
 
 #mask erstellen
 mask = cv2.inRange(hsv,lower_white,upper_white)
@@ -43,6 +43,5 @@ line_segments = cv2.HoughLinesP(cropped_edges, rho, angle, min_threshold, #outpu
 
 #drawing line 
 
-#ok ok
 cv2.imshow("Input",cropped_edges)
 cv2.waitKey(0)
