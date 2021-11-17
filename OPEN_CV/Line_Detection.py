@@ -45,4 +45,4 @@ polygon = np.array([[
 cv2.fillPoly(mask, pts = [polygon], color=(255,255,255))
 cropped_edges = cv2.bitwise_and(edges, mask)
 cv2.imshow("Detect edges",cropped_edges)
-
+cv2.waitKey(0)
