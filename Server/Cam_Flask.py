@@ -4,8 +4,7 @@ import picamera
 import cv2
 import socket 
 import io 
-app=Flask(__name__,template_folder='templates')
-vc = cv2.VideoCapture(0) 
+app=Flask(__name__,template_folder='templates') 
 @app.route('/') 
 def index(): 
    """Video streaming .""" 
@@ -20,7 +19,7 @@ def gen(vc):
 @app.route('/video_feed') 
 def video_feed(): 
    """Video streaming route. Put this in the src attribute of an img tag.""" 
-   return Response(gen(vc), 
+   return Response(gen(cv2.VideoCapture(0) ), 
                    mimetype='multipart/x-mixed-replace; boundary=frame') 
 if __name__ == '__main__': 
 	app.run(host='0.0.0.0', debug=True, threaded=True) 
