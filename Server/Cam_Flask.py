@@ -9,8 +9,9 @@ app=Flask(__name__,template_folder='templates')
 def index(): 
    """Video streaming .""" 
    return render_template('index.html') 
-def gen(vc): 
+def gen(): 
    """Video streaming generator function.""" 
+   vc = cv2.VideoCapture(0)
    while True: 
        rval, frame = vc.read() 
        #cv2.imwrite('pic.jpg', frame) 
@@ -19,7 +20,7 @@ def gen(vc):
 @app.route('/video_feed') 
 def video_feed(): 
    """Video streaming route. Put this in the src attribute of an img tag.""" 
-   return Response(gen(cv2.VideoCapture(0) ), 
+   return Response(gen(), 
                    mimetype='multipart/x-mixed-replace; boundary=frame') 
 if __name__ == '__main__': 
 	app.run(host='0.0.0.0', debug=True, threaded=True) 
