@@ -1,48 +1,36 @@
 import numpy as np 
 import cv2
 import matplotlib.pyplot as plt
-def make_points(frame, line):
-    height, width, _ = frame.shape
-    slope, intercept = line
-    y1 = height  # bottom of the frame
-    y2 = int(y1 * 1 / 2)  # make points from middle of the frame down
+import sys
+sys.path.insert(0,"..\OPEN_CV")
+import Detection_Edges
+import Cutting_Image
+import Detect_Line_Segment
+import Combine_Line_Segments
+import f_make_point
+import logging
 
-    # bound the coordinates within the frame
-    x1 = max(-width, min(2 * width, int((y1 - intercept) / slope)))
-    x2 = max(-width, min(2 * width, int((y2 - intercept) / slope)))
-    return [[x1, y1, x2, y2]]
 #import piture
-frame = cv2.imread('./line.jpg')
+frame = cv2.imread('F:/FH_Kiel/Projekt/Autonomous_Car/OPEN_CV/line_3.jpg')
 hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
 
-cv2.imshow("Detect frame",hsv)
-
-#define white range
-
-lower_white = np.array([15,40,40])
-upper_white = np.array([15,255,255])
-
+lower_blue = np.array([20, 20, 20])
+upper_blue = np.array([255, 255, 255])
 
 #mask erstellen
-mask = cv2.inRange(hsv,lower_white,upper_white)
-cv2.imshow("Detect mask",mask)
-
-#detection edges of lines
-edges = cv2.Canny(mask, 200, 400)
+mask = cv2.inRange(hsv,lower_blue,upper_blue)
 
 
-#cutting image
-height,width = edges.shape
-mask = np.zeros_like(edges) #Return an array of zeros with the same shape and type as a given array
 
-polygon = np.array([[
-	(0,height * 1/2),
-	(width,height * 1/2),
-	(width,height),
-	(0,height),
-	]],np.int32)
+def detect_lane(frame):
+	edges = Detection_Edges.detection_edges(frame)
+	cropped_edges = Cutting_Image.cutting_image(edges)
+	line_segments = Detect_Line_Segment.detect_line_segments(cropped_edges)
+	lane_lines = Combine_Line_Segments.average_slope_intercept(frame, line_segments)
 
-cv2.fillPoly(mask, pts = [polygon], color=(255,255,255))
-cropped_edges = cv2.bitwise_and(edges, mask)
-cv2.imshow("Detect edges",cropped_edges)
+	return cropped_edges
+
+detect_lane(frame)
+
+cv2.imshow("abc", mask)
 cv2.waitKey(0)

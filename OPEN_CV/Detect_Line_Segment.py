@@ -1,3 +1,8 @@
+import numpy as np 
+import cv2
+import sys
+
+
 def detect_line_segments(cropped_edges):
     # tuning min_threshold, minLineLength, maxLineGap is a trial and error process by hand
     rho = 1  # distance precision in pixel, i.e. 1 pixel

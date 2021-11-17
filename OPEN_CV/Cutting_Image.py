@@ -1,5 +1,6 @@
 import numpy as np 
 import cv2
+import sys
 
 def cutting_image(edges):
 	height,width = edges.shape
