@@ -5,6 +5,7 @@ import cv2
 import socket 
 import io 
 app=Flask(__name__,template_folder='templates')
+vc = cv2.VideoCapture(0) 
 @app.route('/') 
 def index(): 
    """Video streaming .""" 
@@ -14,7 +15,7 @@ def gen():
    """Video streaming generator function.""" 
    while True: 
        rval, frame = vc.read() 
-       cv2.imwrite('pic.jpg', frame) 
+       #cv2.imwrite('pic.jpg', frame) 
        yield (b'--frame\r\n' 
               b'Content-Type: image/jpeg\r\n\r\n' + open('pic.jpg', 'rb').read() + b'\r\n') 
 @app.route('/video_feed') 
