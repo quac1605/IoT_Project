@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 from flask import Flask, render_template, Response
-from camera import Camera
+from picamera import Camera
 
 app = Flask(__name__)
 
