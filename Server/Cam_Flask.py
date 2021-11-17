@@ -4,7 +4,7 @@ import picamera
 import cv2
 import socket 
 import io 
-app = Flask(__name__) 
+app=Flask(__name__,template_folder='templates')
 vc = cv2.VideoCapture(0) 
 @app.route('/') 
 def index(): 
