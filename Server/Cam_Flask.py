@@ -1,5 +1,5 @@
 from flask import Flask, render_template, Response, request, redirect, url_for
-import _thread
+from threading import Thread
 from queue import Queue
 import os
 from time import sleep
