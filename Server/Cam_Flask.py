@@ -1,3 +1,5 @@
+from flask import Flask, render_template, Response, request, redirect, url_for
+import Control as ctrl
 from time import sleep
 import sys
 from camera import VideoCamera
@@ -5,8 +7,6 @@ import time
 import threading
 import os
 sys.path.insert(0, "//home//pi//Desktop//IoT_Project//Modul//Motor_Control")
-import Control as ctrl
-from flask import Flask, render_template, Response, request, redirect, url_for
 
 speed = 0
 angle = 0
@@ -35,28 +35,34 @@ def video_feed():
     return Response(gen(pi_camera),
                     mimetype='multipart/x-mixed-replace; boundary=frame')
 
+
 # try to control throw keyboard behavior
-"""
-@app.route("/online_control/<speed>/<angle>")
-def online_control(speed,angle):
-        #ctrl.speed(speed)
-        #ctrl.grad(angle)
-        print(speed)
-        print(angle)
-        return 0
+
+@app.route('/online_control', methods=['POST'])
+def online_control():
+    speed = request.form['speed']
+    angle = request.form['angle']
+    # ctrl.speed(int(speed))
+    # ctrl.grad(int(angle))
+    print(speed)
+    print(angle)
+
+
 """
 @app.route('/success/<name>')
 def success(name):
-   return 'welcome %s' % name
+    return 'welcome %s' % name
 
-@app.route('/login',methods = ['POST', 'GET'])
+
+@app.route('/login', methods=['POST', 'GET'])
 def login():
-   if request.method == 'POST':
-      user = request.form['nm']
-      return redirect(url_for('success',name = user))
-   else:
-      user = request.args.get('nm')
-      return redirect(url_for('success',name = user))
+    if request.method == 'POST':
+        user = request.form['nm']
+        return redirect(url_for('success', name=user))
+    else:
+        user = request.args.get('nm')
+        return redirect(url_for('success', name=user))
+"""
 
 if __name__ == '__main__':
 
