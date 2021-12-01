@@ -1,5 +1,6 @@
 from flask import Flask, render_template, Response, request, redirect, url_for
 import _thread
+from queue import Queue
 import os
 from time import sleep
 import sys
@@ -11,6 +12,7 @@ sys.path.insert(0, "//home//pi//Desktop//IoT_Project//Modul//Motor_Control")
 import Control as ctrl
 
 
+queue = Queue()
 pi_camera = VideoCamera(flip=False)  # flip pi camera if upside down.
 
 # App Globals (do not edit)
@@ -37,22 +39,31 @@ def video_feed():
 
 
 # try to control throw keyboard behavior
-def control_loop(speed,angle):
+def control_loop():
     while True:
+        global speed;
+        global angle;
         ctrl.speed(int(speed))
         ctrl.grad(int(angle))
         print("speed:  ", speed)
         print("angle:  ", angle)
         sleep(0.1)
 
+def thread1(threadname, q):
+    #read variable "a" modify by thread 2
+    while True:
+        a = q.get()
+        if a is None: return # Poison pill
+        print(a)
+
+thread1 = Thread( target=thread1, args=("Thread-1", queue) )
+
 
 @app.route('/online_control', methods=['POST'])
 def online_control():
-    global speed
-    global angle
     speed = request.form['speed']
     angle = request.form['angle']
-
+    queue.put( speed)
     print(speed)
     print(angle)
     return ("",204)
@@ -76,6 +87,7 @@ def online_control():
 """
 
 if __name__ == '__main__':
-    _thread.start_new_thread(control_loop, (speed,angle))
-
+    #_thread.start_new_thread(control_loop, (speed,angle))
+    thread1.start()
+    thread1.join()
     app.run(host='0.0.0.0', debug=False)
