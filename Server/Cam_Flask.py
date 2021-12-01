@@ -56,7 +56,7 @@ def success(name):
 
 
 @app.route('/online_control', methods=['POST', 'GET'])
-def login():
+def online_control():
     if request.method == 'POST':
         user = request.form['nm']
         print(user)
