@@ -1,6 +1,6 @@
 import sys
-sys.path.insert(0, "//home//pi//Desktop//CAR//Modul//Motor_Control//DC_Motor")
-sys.path.insert(0, "//home//pi//Desktop//CAR//Modul//Motor_Control//Schritt_Motor")
+sys.path.insert(0, "//home//pi//Desktop//IoT_Project//Modul//Motor_Control//DC_Motor")
+sys.path.insert(0, "//home//pi//Desktop//IoT_Project//Modul//Motor_Control//Schritt_Motor")
 import Backward as bw
 import Forward as fw
 import Left as lf

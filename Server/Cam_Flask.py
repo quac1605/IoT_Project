@@ -4,7 +4,7 @@ from camera import VideoCamera
 import time
 import threading
 import os
-sys.path.insert(0, "//home//pi//Desktop//CAR//Modul//Motor_Control")
+sys.path.insert(0, "//home//pi//Desktop//IoT_Project//Modul//Motor_Control")
 import Control as ctrl
 from flask import Flask, render_template, Response, request
 

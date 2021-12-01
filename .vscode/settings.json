@@ -1,0 +1,7 @@
+{
+    "python.analysis.extraPaths": [
+        "./Modul/Motor_Control",
+        "./Modul/Motor_Control/DC_Motor",
+        "./Modul/Motor_Control/Schritt_Motor"
+    ]
+}

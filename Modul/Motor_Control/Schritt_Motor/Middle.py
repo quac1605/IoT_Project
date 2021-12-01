@@ -1,7 +1,7 @@
 import sys
 import time
 # Insert the path of modules folder
-sys.path.insert(0, "//home//pi//Desktop//CAR//Modul//Motor_Control")
+sys.path.insert(0, "//home//pi//Desktop//IoT_Project//Modul//Motor_Control")
 
 import PWM
 
