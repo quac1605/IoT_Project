@@ -6,7 +6,7 @@ import threading
 import os
 sys.path.insert(0, "//home//pi//Desktop//IoT_Project//Modul//Motor_Control")
 import Control as ctrl
-from flask import Flask, render_template, Response, request
+from flask import Flask, render_template, Response, request, redirect, url_for
 
 speed = 0
 angle = 0
@@ -24,7 +24,7 @@ def index():
 
 def gen(camera):
     # get camera frame
-    #while True:
+    while True:
         frame = camera.get_frame()
         yield (b'--frame\r\n'
                b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
@@ -32,13 +32,10 @@ def gen(camera):
 
 @app.route('/video_feed')
 def video_feed():
-    print("dmm")
     return Response(gen(pi_camera),
                     mimetype='multipart/x-mixed-replace; boundary=frame')
 
 # try to control throw keyboard behavior
-
-
 @app.route('/online_control', methods=['POST'])
 def online_control():
     if request.method == 'POST':
@@ -48,6 +45,7 @@ def online_control():
         #ctrl.grad(angle)
         print("speed: ", speed)
         print("angle: ", angle)
+        return redirect(url_for('dmm',{'welcome %s' %speed}))
 
 if __name__ == '__main__':
 
