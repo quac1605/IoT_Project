@@ -1,12 +1,13 @@
 from time import sleep
-import Control as ctrl
-from flask import Flask, render_template, Response, request
+import sys
 from camera import VideoCamera
 import time
 import threading
 import os
-
 sys.path.insert(0, "//home//pi//Desktop//CAR//Modul//Motor_Control")
+import Control as ctrl
+from flask import Flask, render_template, Response, request
+
 speed = 0
 angle = 0
 
