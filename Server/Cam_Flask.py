@@ -56,8 +56,8 @@ def online_control():
 
 @app.route('/test')
 def test():
-    return Response(Response(control_respon(speed,angle),
-                    mimetype='multipart/x-mixed-replace; boundary=frame'))
+    return Response(control_respon(speed,angle),
+                    mimetype='multipart/x-mixed-replace; boundary=frame')
 
 """
 @app.route('/success/<name>')
