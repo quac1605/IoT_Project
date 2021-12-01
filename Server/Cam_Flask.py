@@ -56,8 +56,11 @@ def thread1(threadname, q1,q2):
         speed = q1.get()
         angle = q2.get()
         if speed is None: return # Poison pill
-        print("speed in control_thread",speed)
-        print("angle in control_thread",angle)
+        ctrl.speed(int(speed))
+        #print("speed in control_thread",speed)
+        if angle is None: return
+        ctrl.grad(int(angle))
+        #print("angle in control_thread",angle)
 
 thread1 = Thread( target=thread1, args=("Thread-1", speed_queue,angle_queue) )
 
@@ -68,8 +71,8 @@ def online_control():
     angle = request.form['angle']
     speed_queue.put( speed)
     angle_queue.put( angle);
-    print("online control speed received: ",speed)
-    print("online control angle received",angle)
+    #print("online control speed received: ",speed)
+    #print("online control angle received",angle)
     return ("",204)
 
 
