@@ -7,7 +7,7 @@
     <img src="{{ url_for('video_feed') }}" width="640" height="480" />
 
     <iframe name="dummyframe" id="dummyframe" style="display: none;"></iframe>
-    <form id="online_control_form" action="http://localhost:5000//online_control" method="post" target="dummyframe">
+    <form id="online_control_form" action="http://localhost:5000//online_control" method="get" target="dummyframe">
       <label >Speed:</label><br />
       <input type="text" id="speed" name="speed" value="speed" readonly /><br />
       <label >Angle:</label><br />
