@@ -12,7 +12,8 @@ sys.path.insert(0, "//home//pi//Desktop//IoT_Project//Modul//Motor_Control")
 import Control as ctrl
 
 
-queue = Queue()
+speed_queue = Queue()
+angle_queue = Queue()
 pi_camera = VideoCamera(flip=False)  # flip pi camera if upside down.
 
 # App Globals (do not edit)
@@ -49,23 +50,26 @@ def control_loop():
         print("angle:  ", angle)
         sleep(0.1)
 
-def thread1(threadname, q):
+def thread1(threadname, q1,q2):
     #read variable "a" modify by thread 2
     while True:
-        a = q.get()
-        if a is None: return # Poison pill
-        print(a)
+        speed = q1.get()
+        angle = q2.get()
+        if speed is None: return # Poison pill
+        print("speed in control_thread",speed)
+        print("angle in control_thread",angle)
 
-thread1 = Thread( target=thread1, args=("Thread-1", queue) )
+thread1 = Thread( target=thread1, args=("Thread-1", speed_queue,angle_queue) )
 
 
 @app.route('/online_control', methods=['POST'])
 def online_control():
     speed = request.form['speed']
     angle = request.form['angle']
-    queue.put( speed)
-    print(speed)
-    print(angle)
+    speed_queue.put( speed)
+    angle_queue.put( angle);
+    print("online control speed received: ",speed)
+    print("online control angle received",angle)
     return ("",204)
 
 
