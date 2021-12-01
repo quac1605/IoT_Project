@@ -5,5 +5,31 @@
     <body> 
       <h1> Live Video Streaming </h1> 
       <img src="{{ url_for('video_feed') }}" width="640" height="480"> 
+
+      <script>
+        window.addEventListener("keydown", function(event) {
+          if (event.defaultPrevented) {
+            return;
+          }
+          if (event.code === "ArrowDown"){
+              // Handle "down"
+              myFunction();
+          } else if (event.code === "ArrowUp"){
+              // Handle "up"
+              myFunction();
+          } else if (event.code === "ArrowLeft"){
+              // Handle "left"
+              myFunction();
+          } else if (event.code === "ArrowRight"){
+              // Handle "right"
+              myFunction();
+          }
+          event.preventDefault();
+        }, true);
+        function myFunction() {
+          alert("You pressed a key inside the input field");
+        }
+        </script>
+        
     </body> 
    </html> 
