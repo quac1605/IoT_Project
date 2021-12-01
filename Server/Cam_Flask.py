@@ -44,6 +44,8 @@ def online_control():
         angle = request.form['angle']
         ctrl.speed(speed)
         ctrl.grad(angle)
+    else:
+        print("cl")
 
 if __name__ == '__main__':
 
