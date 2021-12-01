@@ -1,5 +1,4 @@
 from time import sleep
-import KeyBoardRecogniton as kw
 import Control as ctrl
 from flask import Flask, render_template, Response, request
 from camera import VideoCamera
