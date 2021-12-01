@@ -42,7 +42,7 @@ def control_respon(speed,angle):
     while True:
         ctrl.speed(int(speed))
         ctrl.grad(int(angle))
-        sleep(0.5)
+        sleep(0.1)
 
 
 @app.route('/online_control', methods=['POST'])
@@ -52,10 +52,14 @@ def online_control():
 
     print(speed)
     print(angle)
-    return Response(control_respon(speed,angle),204)
+    return ("",204)
+
+@app.route('/test')
+def test():
+    return Response(Response(control_respon(speed,angle),
+                    mimetype='multipart/x-mixed-replace; boundary=frame'))
 
 """
-
 @app.route('/success/<name>')
 def success(name):
     return 'welcome %s' % name
