@@ -1,4 +1,5 @@
 from flask import Flask, render_template, Response, request, redirect, url_for
+import thread
 import os
 from time import sleep
 import sys
@@ -9,8 +10,8 @@ import threading
 sys.path.insert(0, "//home//pi//Desktop//IoT_Project//Modul//Motor_Control")
 import Control as ctrl
 
-speed = 0
-angle = 0
+global speed
+global angle
 
 pi_camera = VideoCamera(flip=False)  # flip pi camera if upside down.
 
@@ -38,7 +39,7 @@ def video_feed():
 
 
 # try to control throw keyboard behavior
-def control_respon(speed,angle):
+def control_loop():
     while True:
         ctrl.speed(int(speed))
         ctrl.grad(int(angle))
@@ -54,10 +55,6 @@ def online_control():
     print(angle)
     return ("",204)
 
-@app.route('/test')
-def test():
-    return Response(control_respon(speed,angle),
-                    mimetype='multipart/x-mixed-replace; boundary=frame')
 
 """
 @app.route('/success/<name>')
@@ -77,5 +74,8 @@ def online_control():
 """
 
 if __name__ == '__main__':
+    speed = 0
+    angle = 0
+    thread.start_new_thread(control_loop, ())
 
     app.run(host='0.0.0.0', debug=False)
