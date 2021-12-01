@@ -43,8 +43,8 @@ def video_feed():
 def online_control():
     speed = request.form['speed']
     angle = request.form['angle']
-    # ctrl.speed(int(speed))
-    # ctrl.grad(int(angle))
+    ctrl.speed(int(speed))
+    ctrl.grad(int(angle))
     print(speed)
     print(angle)
     return ('', 204)
