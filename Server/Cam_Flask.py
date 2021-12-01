@@ -42,7 +42,7 @@ def control_respon(speed,angle):
     while True:
         ctrl.speed(int(speed))
         ctrl.grad(int(angle))
-        sleep(0.1)
+        sleep(0.5)
 
 
 @app.route('/online_control', methods=['POST'])
