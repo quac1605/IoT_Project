@@ -42,8 +42,10 @@ def online_control():
     if request.method == 'POST':
         speed = request.form['speed']
         angle = request.form['angle']
-        ctrl.speed(speed)
-        ctrl.grad(angle)
+        #ctrl.speed(speed)
+        #ctrl.grad(angle)
+        print(speed)
+        print(angle)
     else:
         print("cl")
 
