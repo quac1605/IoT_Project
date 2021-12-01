@@ -37,7 +37,7 @@ def video_feed():
 
 # try to control throw keyboard behavior
 
-@app.route('/online_control', methods=['POST'])
+@app.route('/online_control', methods=['POST', 'GET'])
 def online_control():
     if request.method == 'POST':
         speed = request.form['speed']
@@ -46,8 +46,11 @@ def online_control():
         #ctrl.grad(angle)
         print(speed)
         print(angle)
+        return redirect(url_for('online_control',"<p>speed<p>"))
     else:
-        print("cl")
+      user = request.args.get('speed')
+      return redirect(url_for('online_control',"<p>cc<p>"))
+
 
 if __name__ == '__main__':
 
