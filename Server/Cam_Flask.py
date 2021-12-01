@@ -36,6 +36,11 @@ def video_feed():
                     mimetype='multipart/x-mixed-replace; boundary=frame')
 
 # try to control throw keyboard behavior
+
+@app.route('/success/<name>')
+def success(name):
+   return 'welcome %s' % name
+
 @app.route('/online_control', methods=['POST'])
 def online_control():
     if request.method == 'POST':
@@ -45,7 +50,7 @@ def online_control():
         #ctrl.grad(angle)
         print("speed: ", speed)
         print("angle: ", angle)
-        return redirect(url_for('dmm',{'welcome %s' %speed}))
+        return redirect(url_for('success',name = speed))
 
 if __name__ == '__main__':
 
