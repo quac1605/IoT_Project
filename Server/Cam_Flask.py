@@ -1,12 +1,13 @@
 from flask import Flask, render_template, Response, request, redirect, url_for
-import Control as ctrl
+import os
 from time import sleep
 import sys
 from camera import VideoCamera
 import time
 import threading
-import os
+
 sys.path.insert(0, "//home//pi//Desktop//IoT_Project//Modul//Motor_Control")
+import Control as ctrl
 
 speed = 0
 angle = 0
