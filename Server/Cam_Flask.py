@@ -60,10 +60,10 @@ def online_control():
     if request.method == 'POST':
         user = request.form['nm']
         print(user)
-        return redirect(url_for('success'))
+        return redirect(url_for('success', name=user))
     else:
         user = request.args.get('nm')
-        return redirect(url_for('success'))
+        return redirect(url_for('success', name=user))
 
 
 if __name__ == '__main__':
