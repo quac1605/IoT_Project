@@ -39,7 +39,7 @@ def video_feed():
 
 
 # try to control throw keyboard behavior
-def control_loop():
+def control_loop(speed,angle):
     while True:
         ctrl.speed(int(speed))
         ctrl.grad(int(angle))
@@ -78,6 +78,6 @@ def online_control():
 if __name__ == '__main__':
     speed = 0
     angle = 0
-    _thread.start_new_thread(control_loop, ())
+    _thread.start_new_thread(control_loop, (speed,angle))
 
     app.run(host='0.0.0.0', debug=False)
