@@ -50,6 +50,9 @@ def online_control():
 
 """
 
+@app.route('/success/<name>')
+def success(name):
+    return 'welcome %s' % name
 
 
 @app.route('/online_control', methods=['POST', 'GET'])
@@ -57,8 +60,10 @@ def login():
     if request.method == 'POST':
         user = request.form['nm']
         print(user)
+        return redirect(url_for('success'))
     else:
         user = request.args.get('nm')
+        return redirect(url_for('success'))
 
 
 if __name__ == '__main__':
