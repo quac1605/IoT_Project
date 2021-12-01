@@ -43,6 +43,8 @@ def control_loop():
     while True:
         ctrl.speed(int(speed))
         ctrl.grad(int(angle))
+        print("speed:  ", speed)
+        print("angle:  ", angle)
         sleep(0.1)
 
 
