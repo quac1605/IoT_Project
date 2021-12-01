@@ -76,6 +76,6 @@ def online_control():
 if __name__ == '__main__':
     speed = 0
     angle = 0
-    thread.start_new_thread(control_loop, ())
+    _thread.start_new_thread(control_loop, ())
 
     app.run(host='0.0.0.0', debug=False)
