@@ -44,12 +44,12 @@ def gen(camera):
         yield (b'--frame\r\n'
                b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
 
-
+"""
 @app.route('/video_feed')
 def video_feed():
     return Response(gen(pi_camera),
                     mimetype='multipart/x-mixed-replace; boundary=frame')
-
+"""
 
 @socketio.on('connect')
 def test_connect():
@@ -87,7 +87,7 @@ def thread1(threadname, val):
 
 #thread1 = Thread( target=thread1, args=("Thread-1", values) )
 
-
+"""
 @app.route('/online_control', methods=['POST'])
 def online_control():
     global speed
@@ -99,7 +99,7 @@ def online_control():
     #print("online control speed received: ",speed)
     #print("online control angle received",angle)
     return ("",204)
-
+"""
 
 """
 @app.route('/success/<name>')
