@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>HQK IOT CAR</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+	<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function () {
+
+			// sending a connect request to the server.
+			var socket = io.connect('http://localhost:5000');
+
+			// An event handler for a change of value 
+			$('input.sync').on('input', function (event) {
+				console.log("da thay doi")
+				socket.emit('Value changed', { who: $(this).attr('id'), data: $(this).val() });
+				return false;
+			});
+
+			socket.on('after connect', function (msg) {
+				console.log('After connect', msg);
+			});
+
+			socket.on('update value', function (msg) {
+				console.log('Slider value updated ' + msg.who + " " + msg.data);
+				$('#' + msg.who).val(msg.data);
+			});
+
+			// catching keyboard event with JQuery
+			$(this).keydown(function (event) {
+				event.preventDefault();
+				if (event.code === "ArrowDown") {
+					// Handle "down"
+					$('#' + 'speed').val(test_input(parseInt($('#' + 'speed').val()) - parseInt(20))).trigger('input');
+				} else if (event.code === "ArrowUp") {
+					// Handle "up"
+					$('#' + 'speed').val(test_input(parseInt($('#' + 'speed').val()) + parseInt(20))).trigger('input');
+				} else if (event.code === "ArrowLeft") {
+					// Handle "left"
+					$('#' + 'angle').val(test_input(parseInt($('#' + 'angle').val()) - parseInt(25))).trigger('input');
+				} else if (event.code === "ArrowRight") {
+					// Handle "right"
+					$('#' + 'angle').val(test_input(parseInt($('#' + 'angle').val()) + parseInt(25))).trigger('input');
+				} else if (event.code === "KeyS") {		//to stop
+					$('#' + 'angle').val(0).trigger('input');
+					$('#' + 'speed').val(0).trigger('input');
+				}
+			});
+			function test_input(x) {
+				if (x < -100) {
+					return -100;
+				} else if (x > 100) {
+					return 100;
+				} else {
+					return x;
+				}
+			}
+		});
+	</script>
+</head>
+
+<body>
+	<div class="container text-center">
+			<h1>Live Video Streaming</h1>
+			<img width="320" height="240" />
+		<form class="mt-5">
+			<div class="form-group">
+				<label for="formControl">Speed</label>
+				<input type="text" class="form-control-range sync" id="speed" value={{speed}} readonly>
+			</div>
+			<div class="form-group">
+				<label for="formControl">Angle</label>
+				<input type="text" class="form-control-range sync" id="angle" value={{angle}} readonly>
+			</div>
+		</form>
+	</div>
+</body>
+
+</html>
