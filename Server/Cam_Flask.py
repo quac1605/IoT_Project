@@ -80,7 +80,7 @@ def thread1(threadname, val):
         if values['speed'] is None: return # Poison pill
         #ctrl.speed(int(speed))
         print("speed in control_thread",values['speed'])
-        if angle is None: return
+        if values['angle'] is None: return
         #ctrl.grad(int(angle))
         print("angle in control_thread",values['angle'])
         sleep(0.1)
