@@ -22,9 +22,7 @@ angle = 0
 pi_camera = VideoCamera(flip=False)  # flip pi camera if upside down.
 
 # App Globals (do not edit)
-sio = socketio.Server(async_mode='threading')
 app = Flask(__name__)
-app.wsgi_app = socketio.WSGIApp(sio, app.wsgi_app)
 
 
 @app.route('/')
