@@ -4,7 +4,7 @@
   </head>
   <body>
     <h1>Live Video Streaming</h1>
-    <img src="{{ url_for('video_feed') }}" width="640" height="480" />
+    <img src="{{ url_for('video_feed') }}" width="320" height="240" />
 
     <iframe name="dummyframe" id="dummyframe" style="display: none;"></iframe>
     <form id="online_control_form" action="http://192.168.0.106:5000/online_control" method="post" target="dummyframe">
@@ -38,11 +38,11 @@
           }
           if (event.code === "ArrowDown") {
             // Handle "down"
-            speed = test_input(speed - 25);
+            speed = test_input(speed - 20);
             myFunction();
           } else if (event.code === "ArrowUp") {
             // Handle "up"
-            speed = test_input(speed + 25);
+            speed = test_input(speed + 20);
             myFunction();
           } else if (event.code === "ArrowLeft") {
             // Handle "left"

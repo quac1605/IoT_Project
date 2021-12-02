@@ -48,7 +48,7 @@ def control_loop():
         ctrl.grad(int(angle))
         print("speed:  ", speed)
         print("angle:  ", angle)
-        sleep(0.05)
+        sleep(0.08)
 
 def thread1(threadname, q1,q2):
     #read variable "a" modify by thread 2
