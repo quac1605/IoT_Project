@@ -49,6 +49,15 @@ def video_feed():
                     mimetype='multipart/x-mixed-replace; boundary=frame')
 
 
+@socketio.on('connect')
+def test_connect():
+    emit('after connect',  {'data':'Lets dance'})
+
+@socketio.on('Value changed')
+def value_changed(message):
+    values[message['who']] = message['data']
+    emit('update value', message, broadcast=True)
+    print(message['data'])
 # try to control throw keyboard behavior
 def control_loop():
     global speed

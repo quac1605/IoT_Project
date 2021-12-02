@@ -2,81 +2,81 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <title>HKQ IOT CAR</title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
-  <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js"></script>
-  <script type="text/javascript" charset="utf-8">
-    var socket = io();
-    socket.on('connect', function () {
-      socket.emit('my event', { data: 'I\'m connected!' });
-    });
-  </script>
+	<meta charset="UTF-8">
+	<title>HQK IOT CAR</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+	<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function () {
+
+			// sending a connect request to the server.
+			var socket = io.connect('http://localhost:5000');
+
+			// An event handler for a change of value 
+			$('input.sync').on('input', function (event) {
+				console.log("da thay doi")
+				socket.emit('Value changed', { who: $(this).attr('id'), data: $(this).val() });
+				return false;
+			});
+
+			socket.on('after connect', function (msg) {
+				console.log('After connect', msg);
+			});
+
+			socket.on('update value', function (msg) {
+				console.log('Slider value updated ' + msg.who + " " + msg.data);
+				$('#' + msg.who).val(msg.data);
+			});
+
+			// catching keyboard event with JQuery
+			$(this).keydown(function (event) {
+				event.preventDefault();
+				if (event.code === "ArrowDown") {
+					// Handle "down"
+					$('#' + 'speed').val(test_input(parseInt($('#' + 'speed').val()) - parseInt(20))).trigger('input');
+				} else if (event.code === "ArrowUp") {
+					// Handle "up"
+					$('#' + 'speed').val(test_input(parseInt($('#' + 'speed').val()) + parseInt(20))).trigger('input');
+				} else if (event.code === "ArrowLeft") {
+					// Handle "left"
+					$('#' + 'angle').val(test_input(parseInt($('#' + 'angle').val()) - parseInt(25))).trigger('input');
+				} else if (event.code === "ArrowRight") {
+					// Handle "right"
+					$('#' + 'angle').val(test_input(parseInt($('#' + 'angle').val()) + parseInt(25))).trigger('input');
+				} else if (event.code === "KeyS") {		//to stop
+					$('#' + 'angle').val(0).trigger('input');
+					$('#' + 'speed').val(0).trigger('input');
+				}
+			});
+			function test_input(x) {
+				if (x < -100) {
+					return -100;
+				} else if (x > 100) {
+					return 100;
+				} else {
+					return x;
+				}
+			}
+		});
+	</script>
 </head>
 
 <body>
-  <h1>Live Video Streaming</h1>
-  <img src="{{ url_for('video_feed') }}" width="320" height="240" />
-
-  <iframe name="dummyframe" id="dummyframe" style="display: none;"></iframe>
-  <form id="online_control_form" action="http://192.168.0.106:5000/online_control" method="post" target="dummyframe">
-    <label>Speed:</label><br />
-    <input type="text" id="speed" name="speed" value="speed" readonly /><br />
-    <label>Angle:</label><br />
-    <input type="text" id="angle" name="angle" value="angle" readonly /><br />
-    <p><input type="submit" value="submit" hidden=true /></p>
-  </form>
-
-  <script>
-    var speed = 0;
-    var angle = 0;
-
-    //use to avoid over control
-    function test_input(x) {
-      if (x < -100) {
-        return -100;
-      } else if (x > 100) {
-        return 100;
-      } else {
-        return x;
-      }
-
-    }
-    window.addEventListener(
-      "keydown",
-      function (event) {
-        if (event.defaultPrevented) {
-          return;
-        }
-        if (event.code === "ArrowDown") {
-          // Handle "down"
-          speed = test_input(speed - 20);
-          myFunction();
-        } else if (event.code === "ArrowUp") {
-          // Handle "up"
-          speed = test_input(speed + 20);
-          myFunction();
-        } else if (event.code === "ArrowLeft") {
-          // Handle "left"
-          angle = test_input(angle - 25);
-          myFunction();
-        } else if (event.code === "ArrowRight") {
-          // Handle "right"
-          angle = test_input(angle + 25);
-          myFunction();
-        }
-        event.preventDefault();
-      },
-      true
-    );
-    function myFunction() {
-      //alert("You pressed a key inside the input field");
-      document.getElementById("speed").value = speed;
-      document.getElementById("angle").value = angle;
-      document.getElementById("online_control_form").submit();
-    }
-  </script>
+	<div class="container text-center">
+			<h1>Live Video Streaming</h1>
+			<img src="{{ url_for('video_feed') }}" width="320" height="240" />
+		<form class="mt-5">
+			<div class="form-group">
+				<label for="formControl">Speed</label>
+				<input type="text" class="form-control-range sync" id="speed" value={{speed}} readonly>
+			</div>
+			<div class="form-group">
+				<label for="formControl">Angle</label>
+				<input type="text" class="form-control-range sync" id="angle" value={{angle}} readonly>
+			</div>
+		</form>
+	</div>
 </body>
 
 </html>
