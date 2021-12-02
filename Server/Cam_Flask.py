@@ -1,4 +1,5 @@
 from flask import Flask, render_template, Response, request, redirect, url_for
+from flask_socketio import SocketIO
 from threading import Thread
 from queue import Queue
 import os
@@ -61,6 +62,7 @@ def thread1(threadname, q1,q2):
         if angle is None: return
         ctrl.grad(int(angle))
         #print("angle in control_thread",angle)
+        sleep(0.08)
 
 thread1 = Thread( target=thread1, args=("Thread-1", speed_queue,angle_queue) )
 
