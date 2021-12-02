@@ -1,68 +1,82 @@
-<html>
-  <head>
-    <title>Video Streaming</title>
-  </head>
-  <body>
-    <h1>Live Video Streaming</h1>
-    <img src="{{ url_for('video_feed') }}" width="320" height="240" />
+<!DOCTYPE html>
+<html lang="en">
 
-    <iframe name="dummyframe" id="dummyframe" style="display: none;"></iframe>
-    <form id="online_control_form" action="http://192.168.0.106:5000/online_control" method="post" target="dummyframe">
-      <label >Speed:</label><br />
-      <input type="text" id="speed" name="speed" value="speed" readonly /><br />
-      <label >Angle:</label><br />
-      <input type="text" id="angle" name="angle" value="angle" readonly /><br />
-      <p><input type="submit" value="submit" hidden=true /></p>
-    </form>
+<head>
+  <meta charset="UTF-8">
+  <title>HKQ IOT CAR</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+  <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js"></script>
+  <script type="text/javascript" charset="utf-8">
+    var socket = io();
+    socket.on('connect', function () {
+      socket.emit('my event', { data: 'I\'m connected!' });
+    });
+  </script>
+</head>
 
-    <script>
-      var speed = 0;
-      var angle = 0;
+<body>
+  <h1>Live Video Streaming</h1>
+  <img src="{{ url_for('video_feed') }}" width="320" height="240" />
 
-      //use to avoid over control
-      function test_input(x) {
-        if (x < -100) {
-          return -100;
-        } else if (x > 100) {
-          return 100;
-        } else {
-          return x;
+  <iframe name="dummyframe" id="dummyframe" style="display: none;"></iframe>
+  <form id="online_control_form" action="http://192.168.0.106:5000/online_control" method="post" target="dummyframe">
+    <label>Speed:</label><br />
+    <input type="text" id="speed" name="speed" value="speed" readonly /><br />
+    <label>Angle:</label><br />
+    <input type="text" id="angle" name="angle" value="angle" readonly /><br />
+    <p><input type="submit" value="submit" hidden=true /></p>
+  </form>
+
+  <script>
+    var speed = 0;
+    var angle = 0;
+
+    //use to avoid over control
+    function test_input(x) {
+      if (x < -100) {
+        return -100;
+      } else if (x > 100) {
+        return 100;
+      } else {
+        return x;
+      }
+
+    }
+    window.addEventListener(
+      "keydown",
+      function (event) {
+        if (event.defaultPrevented) {
+          return;
         }
-    
-      }
-      window.addEventListener(
-        "keydown",
-        function (event) {
-          if (event.defaultPrevented) {
-            return;
-          }
-          if (event.code === "ArrowDown") {
-            // Handle "down"
-            speed = test_input(speed - 20);
-            myFunction();
-          } else if (event.code === "ArrowUp") {
-            // Handle "up"
-            speed = test_input(speed + 20);
-            myFunction();
-          } else if (event.code === "ArrowLeft") {
-            // Handle "left"
-            angle = test_input(angle - 25);
-            myFunction();
-          } else if (event.code === "ArrowRight") {
-            // Handle "right"
-            angle = test_input(angle + 25);
-            myFunction();
-          }
-          event.preventDefault();
-        },
-        true
-      );
-      function myFunction() {
-        //alert("You pressed a key inside the input field");
-        document.getElementById("speed").value = speed;
-        document.getElementById("angle").value = angle;
-        document.getElementById("online_control_form").submit();
-      }
-    </script>
-  </body>
+        if (event.code === "ArrowDown") {
+          // Handle "down"
+          speed = test_input(speed - 20);
+          myFunction();
+        } else if (event.code === "ArrowUp") {
+          // Handle "up"
+          speed = test_input(speed + 20);
+          myFunction();
+        } else if (event.code === "ArrowLeft") {
+          // Handle "left"
+          angle = test_input(angle - 25);
+          myFunction();
+        } else if (event.code === "ArrowRight") {
+          // Handle "right"
+          angle = test_input(angle + 25);
+          myFunction();
+        }
+        event.preventDefault();
+      },
+      true
+    );
+    function myFunction() {
+      //alert("You pressed a key inside the input field");
+      document.getElementById("speed").value = speed;
+      document.getElementById("angle").value = angle;
+      document.getElementById("online_control_form").submit();
+    }
+  </script>
+</body>
+
 </html>

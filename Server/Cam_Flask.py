@@ -1,5 +1,5 @@
 from flask import Flask, render_template, Response, request, redirect, url_for
-from flask_socketio import SocketIO
+from flask_socketio import SocketIO, emit
 from threading import Thread
 from queue import Queue
 import os
@@ -23,7 +23,12 @@ pi_camera = VideoCamera(flip=False)  # flip pi camera if upside down.
 
 # App Globals (do not edit)
 app = Flask(__name__)
-
+socketio = SocketIO(app);
+"""
+socketio = SocketIO(app, async_mode='eventlet')
+import eventlet
+eventlet.monkey_patch()
+"""
 
 @app.route('/')
 def index():
@@ -53,7 +58,7 @@ def control_loop():
         ctrl.grad(int(angle))
         print("speed:  ", speed)
         print("angle:  ", angle)
-        sleep(0.08)
+        sleep(0.1)
 
 def thread1(threadname, q1,q2):
     #read variable "a" modify by thread 2
@@ -68,7 +73,7 @@ def thread1(threadname, q1,q2):
         if angle is None: return
         #ctrl.grad(int(angle))
         print("angle in control_thread",angle)
-        sleep(0.08)
+        sleep(0.1)
 
 thread1 = Thread( target=thread1, args=("Thread-1", speed,angle) )
 
@@ -106,5 +111,5 @@ def online_control():
 if __name__ == '__main__':
     #_thread.start_new_thread(control_loop, (speed,angle))
     thread1.start()
-    app.run(host='0.0.0.0', debug=False)
+    socketio.run(app, host='0.0.0.0', debug=False)
     thread1.join()
