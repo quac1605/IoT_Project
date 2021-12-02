@@ -121,5 +121,5 @@ def online_control():
 if __name__ == '__main__':
     #_thread.start_new_thread(control_loop, (speed,angle))
     #thread1.start()
-    socketio.run(app, host='0.0.0.0', debug=False)
+    socketio.run(app, host='0.0.0.0')
     #thread1.join()
