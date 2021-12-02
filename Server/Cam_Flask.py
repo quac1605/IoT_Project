@@ -70,7 +70,7 @@ def thread1(threadname, q1,q2):
         print("angle in control_thread",angle)
         sleep(0.08)
 
-thread1 = Thread( target=thread1, args=("Thread-1", speed_queue,angle_queue) )
+thread1 = Thread( target=thread1, args=("Thread-1", speed,angle) )
 
 
 @app.route('/online_control', methods=['POST'])
