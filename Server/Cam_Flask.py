@@ -16,14 +16,16 @@ import Control as ctrl
 speed_queue = Queue()
 angle_queue = Queue()
 """
-speed = 0
-angle = 0
 
 pi_camera = VideoCamera(flip=False)  # flip pi camera if upside down.
 
 # App Globals (do not edit)
 app = Flask(__name__)
 socketio = SocketIO(app);
+values = {
+    'speed': 0,
+    'angle': 0,
+}
 """
 socketio = SocketIO(app, async_mode='eventlet')
 import eventlet
@@ -55,36 +57,35 @@ def test_connect():
 
 @socketio.on('Value changed')
 def value_changed(message):
+    global values
     values[message['who']] = message['data']
     emit('update value', message, broadcast=True)
     print(message['data'])
 # try to control throw keyboard behavior
 def control_loop():
-    global speed
-    global angle
+    global values
     while True:
-        ctrl.speed(int(speed))
-        ctrl.grad(int(angle))
-        print("speed:  ", speed)
-        print("angle:  ", angle)
+        ctrl.speed(int(values['speed']))
+        ctrl.grad(int(values['angle']))
+        print("speed:  ", values['speed'])
+        print("angle:  ", values['speed'])
         sleep(0.1)
 
-def thread1(threadname, q1,q2):
+def thread1(threadname, val):
     #read variable "a" modify by thread 2
-    global speed
-    global angle
+    global values
     while True:
         #speed = q1.get()
         #angle = q2.get()
-        if speed is None: return # Poison pill
+        if values['speed'] is None: return # Poison pill
         #ctrl.speed(int(speed))
-        print("speed in control_thread",speed)
+        print("speed in control_thread",values['speed'])
         if angle is None: return
         #ctrl.grad(int(angle))
-        print("angle in control_thread",angle)
+        print("angle in control_thread",values['angle'])
         sleep(0.1)
 
-thread1 = Thread( target=thread1, args=("Thread-1", speed,angle) )
+thread1 = Thread( target=thread1, args=("Thread-1", values) )
 
 
 @app.route('/online_control', methods=['POST'])
