@@ -2,6 +2,7 @@ from flask import Flask, render_template
 from flask_socketio import SocketIO, emit
 import os
 import sys
+sys.path.insert(0, ".//camera")
 from camera import VideoCamera
 
 
