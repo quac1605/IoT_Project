@@ -11,7 +11,7 @@
 		$(document).ready(function () {
 
 			// sending a connect request to the server.
-			var socket = io.connect('http://iotCar.local:5000');
+			var socket = io.connect('<localhost>');
 
 			// An event handler for a change of value 
 			$('input.sync').on('input', function (event) {
