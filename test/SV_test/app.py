@@ -9,32 +9,32 @@ import cv2
 app = Flask(__name__)
 socketio = SocketIO(app)
 
-"""
+
 from videoStream import videoStreamBp
 app.register_blueprint(videoStreamBp)
 """
-
+from camera_pi import VideoCamera
+pi_camera = VideoCamera(flip=False) 
+"""
 values = {
     'speed': 0,
     'angle': 0,
 }
 
-
-def gen():
-    """Video streaming generator function."""
+"""
+def gen(camera):
+    # get camera frame
     while True:
-        vc = cv2.VideoCapture(0)
-        rval, frame = vc.read()
+        frame = camera.get_frame()
         yield (b'--frame\r\n'
                b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
 
 
 @app.route('/video_feed')
 def video_feed():
-    """Video streaming route. Put this in the src attribute of an img tag."""
     return Response(gen(),
                     mimetype='multipart/x-mixed-replace; boundary=frame')
-
+"""
 
 @app.route('/')
 def index():
