@@ -4,7 +4,7 @@ import cv2
 
 videoStreamBp = Blueprint('video_stream', __name__)
 
-camera = cv2.VideoCapture(0)
+camera = cv2.VideoCapture("/dev/video0")
 # Raspberry Pi camera module (requires picamera package)
 def gen_frames():  
     while True:
