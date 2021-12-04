@@ -19,7 +19,7 @@ values = {
     'angle': 0,
 }
 
-vc = cv2.VideoCapture(0)
+vc = cv2.VideoCapture("/dev/video0")
 
 def gen():
     """Video streaming generator function."""
