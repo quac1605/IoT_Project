@@ -7,7 +7,12 @@ import time
 import cv2
 
 app = Flask(__name__)
-socketio = SocketIO(app)
+#for socket
+async_mode = None
+socketio = SocketIO(app, async_mode=async_mode)
+#thread = None
+thread1 = None
+thread_lock = Lock()
 
 
 from videoStream import videoStreamBp
