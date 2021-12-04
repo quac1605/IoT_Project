@@ -2,7 +2,7 @@ from flask import Flask, render_template, Response, request
 from flask_socketio import SocketIO, emit
 from threading import Lock
 import cv2
-
+from imutils.video.pivideostream import PiVideoStream
 app = Flask(__name__)
 socketio = SocketIO(app)
 
@@ -16,7 +16,7 @@ values = {
     'angle': 0,
 }
 
-camera = cv2.VideoCapture(0)  # use 0 for web camera
+camera = PiVideoStream().start()  # use 0 for web camera
 #  for cctv camera use rtsp://username:password@ip_address:554/user=username_password='password'_channel=channel_number_stream=0.sdp' instead of camera
 # for local webcam use cv2.VideoCapture(0)
 
