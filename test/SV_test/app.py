@@ -1,9 +1,7 @@
 from flask import Flask, render_template
 from flask_socketio import SocketIO, emit
-import os
-import sys
-from camera import VideoCamera
 
+from camera import VideoCamera
 pi_camera = VideoCamera(flip=False)  # flip pi camera if upside down.
 
 app = Flask(__name__)
