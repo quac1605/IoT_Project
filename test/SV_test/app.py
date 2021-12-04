@@ -19,7 +19,7 @@ values = {
     'angle': 0,
 }
 
-vc = cv2.VideoCapture(1)
+vc = cv2.VideoCapture(0)
 
 def gen():
     """Video streaming generator function."""
@@ -52,4 +52,4 @@ def value_changed(message):
     print(message['data'])
 
 if __name__ == '__main__':
-    socketio.run(app, host='0.0.0.0', port=5000, debug=True)
+    socketio.run(app, host='0.0.0.0', port=5000, debug=False)
