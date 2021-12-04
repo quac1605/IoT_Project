@@ -2,13 +2,13 @@ from flask import Blueprint, Flask, render_template, Response
 
 import cv2
 
-videoStreamBp = Blueprint('video_stream', __name__)
+videoStreamBp = Blueprint('video_feed', __name__)
 
-camera = cv2.VideoCapture(0)
+from camera_pi import VideoCamera
 # Raspberry Pi camera module (requires picamera package)
-def gen_frames():  
+def gen_frames(camera):  
     while True:
-        success, frame = camera.read()  # read the camera frame
+        success, frame = camera.get_frame()  # read the camera frame
         if not success:
             break
         else:
@@ -19,4 +19,4 @@ def gen_frames():
 
 @videoStreamBp.route('/video_feed')
 def video_feed():
-    return Response(gen_frames(), mimetype='multipart/x-mixed-replace; boundary=frame')
+    return Response(gen_frames(VideoCamera(flip=False)), mimetype='multipart/x-mixed-replace; boundary=frame')
