@@ -22,7 +22,7 @@ values = {
 @app.route('/')
 def index():
     return render_template('index.html',**values)
-
+  
 @socketio.on('connect')
 def test_connect():
     emit('after connect',  {'data':'Lets dance'})
@@ -34,4 +34,4 @@ def value_changed(message):
     print(message['data'])
 
 if __name__ == '__main__':
-    socketio.run(app,host='0.0.0.0', port=5000, debug=True)
+    socketio.run(app,host='0.0.0.0', port=5000, debug=False)
