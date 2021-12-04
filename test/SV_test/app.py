@@ -2,7 +2,7 @@ from flask import Flask, render_template
 from flask_socketio import SocketIO, emit
 
 app = Flask(__name__)
-app.config['SERVER_NAME'] = 'iotcar.cc'
+app.config['SERVER_NAME']='iotcar.cc:5000'
 socketio = SocketIO(app)
 
 values = {
@@ -25,4 +25,4 @@ def value_changed(message):
     print(message['data'])
 
 if __name__ == '__main__':
-    socketio.run(app, host='0.0.0.0', debug=True)
+    socketio.run(app, debug=True)
