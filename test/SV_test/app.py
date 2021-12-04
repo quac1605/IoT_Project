@@ -2,7 +2,7 @@ from flask import Flask, render_template, Response, request
 from flask_socketio import SocketIO, emit
 from threading import Lock
 import cv2
-import v4l2capture
+
 import time
 import cv2
 
@@ -19,7 +19,7 @@ values = {
     'angle': 0,
 }
 
-vc = v4l2capture.Video_device("/dev/video0")
+vc = cv2.VideoCapture(0)
 
 def gen():
     """Video streaming generator function."""
