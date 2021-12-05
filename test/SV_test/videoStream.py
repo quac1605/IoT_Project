@@ -3,11 +3,8 @@ from flask import Blueprint, Flask, render_template, Response
 import cv2
 
 videoStreamBp = Blueprint('video_feed', __name__)
-from makeup_artist import Makeup_artist
-from camera import Camera
-from camera_pi import VideoCamera
 
-#camera = Camera(Makeup_artist())
+from camera_pi import VideoCamera
 # Raspberry Pi camera module (requires picamera package)
 def gen_frames(camera):  
     # get camera frame
