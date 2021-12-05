@@ -4,8 +4,10 @@ import cv2
 
 videoStreamBp = Blueprint('video_feed', __name__)
 from makeup_artist import Makeup_artist
-from camera_pi import Camera
-camera = Camera(flip=False)
+from camera import Camera
+from camera_pi import VideoCamera
+
+#camera = Camera(Makeup_artist())
 # Raspberry Pi camera module (requires picamera package)
 def gen_frames(camera):  
     # get camera frame
@@ -16,4 +18,4 @@ def gen_frames(camera):
 
 @videoStreamBp.route('/video_feed')
 def video_feed():
-    return Response(gen_frames(camera), mimetype='multipart/x-mixed-replace; boundary=frame')
+    return Response(gen_frames(VideoCamera(flip=False)), mimetype='multipart/x-mixed-replace; boundary=frame')

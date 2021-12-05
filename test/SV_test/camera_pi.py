@@ -1,10 +1,9 @@
 import cv2
 from imutils.video.pivideostream import PiVideoStream
-import imutils
 import time
 import numpy as np
 
-class Camera(object):
+class VideoCamera(object):
     def __init__(self, resolution=(480, 360), framerate=60,flip = False):
         self.vs = PiVideoStream().start()
         self.flip = flip
