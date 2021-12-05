@@ -4,12 +4,17 @@ from threading import Lock
 
 app = Flask(__name__)
 #for socket
-async_mode = None
-socketio = SocketIO(app, async_mode=async_mode)
+socketio = SocketIO(app, async_mode='eventlet')
+import eventlet
+eventlet.monkey_patch()
 #thread = None
 thread1 = None
 thread_lock = Lock()
 
+
+
+from videoStream import videoStreamBp
+app.register_blueprint(videoStreamBp)
 
 values = {
     'speed': 0,
@@ -31,7 +36,5 @@ def value_changed(message):
     print(message['data'])
 
 
-from videoStream import videoStreamBp
-app.register_blueprint(videoStreamBp)
 if __name__ == '__main__':
     socketio.run(app,host='0.0.0.0', port=5000, debug=True)
