@@ -5,7 +5,7 @@ sys.path.insert(0, "//home//pi//Desktop//IoT_Project//Modul//Motor_Control")
 
 import PWM
 
-max_angle=1.338
+max_angle=1.335
 min_angle=1.472
 
 def rotation(percent):
