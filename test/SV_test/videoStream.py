@@ -4,8 +4,8 @@ import cv2
 
 videoStreamBp = Blueprint('video_feed', __name__)
 from makeup_artist import Makeup_artist
-from camera import Camera
-camera = Camera(Makeup_artist())
+from camera_pi import Camera
+camera = Camera(flip=False)
 # Raspberry Pi camera module (requires picamera package)
 def gen_frames(camera):  
     # get camera frame
