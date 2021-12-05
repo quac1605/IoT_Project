@@ -20,11 +20,11 @@ values = {
 def index():
     return render_template('index.html',**values)
   
-@socketio.on('connect')
+@socketio.on('connect', namespace='/control')
 def test_connect():
     emit('after connect',  {'data':'Lets dance'})
 
-@socketio.on('Value changed')
+@socketio.on('Value changed', namespace='/control')
 def value_changed(message):
     values[message['who']] = message['data']
     emit('update value', message, broadcast=True)
