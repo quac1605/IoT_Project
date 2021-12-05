@@ -9,8 +9,13 @@ pi_camera = VideoCamera(flip=False)
 # Raspberry Pi camera module (requires picamera package)
 def gen_frames(camera):  
     # get camera frame
+    global values
     while True:
         frame = camera.get_frame()
+        if (values['speed'] > 50):
+            print("test ++++++++++++++++++++")
+        elif (values['speed'] < (-50)) 
+            print("test -----------------")   
         yield (b'--frame\r\n'
                b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
 
