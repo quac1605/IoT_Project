@@ -33,16 +33,16 @@
 			var speed_step = 0;
 			$(this).keydown(function (event) {
 				event.preventDefault();
-				if ((event.code === "ArrowDown") && (parseInt($('#' + 'speed').val()) === 0)) {
+				if ((event.code === "ArrowDown") && (parseInt($('#' + 'speed').val()) == 0)) {
 					// Handle "down"
 					$('#' + 'speed').val(parseInt(-speed_step)).trigger('input');
-				} else if ((event.code === "ArrowUp") && (parseInt($('#' + 'speed').val()) === 0)) {
+				} else if ((event.code === "ArrowUp") && (parseInt($('#' + 'speed').val()) == 0)) {
 					// Handle "up"
 					$('#' + 'speed').val(parseInt(speed_step)).trigger('input');
-				} else if ((event.code === "ArrowLeft") && (parseInt($('#' + 'angle').val()) === 0)) {
+				} else if ((event.code === "ArrowLeft") && (parseInt($('#' + 'angle').val()) == 0)) {
 					// Handle "left"
 					$('#' + 'angle').val(-100).trigger('input');
-				} else if ((event.code === "ArrowRight") && (parseInt($('#' + 'angle').val()) === 0)) {
+				} else if ((event.code === "ArrowRight") && (parseInt($('#' + 'angle').val()) == 0)) {
 					// Handle "right"
 					$('#' + 'angle').val(100).trigger('input');
 				} else if (event.code === "KeyS") {		//to stop
@@ -56,10 +56,10 @@
 					speed_step = 75
 				} else if (event.code === "Digit4") {
 					speed_step = 100
-				} else if (event.code === "Digit1") {
+				} else if (event.code === "Digit0") {
 					speed_step = 0
 				} else if (event.code === "KeyM") {
-					if ($('#' + 'mode').val() ==='auto') {
+					if ($('#' + 'mode').val() ==='manuell') {
 						$('#' + 'mode').val('auto').trigger('input');
 					} else {
 						$('#' + 'mode').val('manuell').trigger('input');
