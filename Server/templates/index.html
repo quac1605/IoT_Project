@@ -11,7 +11,7 @@
 		$(document).ready(function () {
 
 			// sending a connect request to the server.
-			var socket = io.connect('http://localhost:5000');
+			var socket = io.connect('http://iotcar.local:5000/control');
 
 			// An event handler for a change of value 
 			$('input.sync').on('input', function (event) {
@@ -64,8 +64,8 @@
 
 <body>
 	<div class="container text-center">
-			<h1>Live Video Streaming</h1>
-			<img src="{{ url_for('video_feed') }}" />
+			<h1>IOT CAR</h1>
+			<img src="{{ url_for('video_feed.video_feed') }}" />
 		<form class="mt-5">
 			<div class="form-group">
 				<label for="formControl">Speed</label>
