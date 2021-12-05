@@ -14,7 +14,7 @@ def gen_frames(camera):
         frame = camera.get_frame()
         if (values['speed'] > 50):
             print("test ++++++++++++++++++++")
-        elif (values['speed'] < (-50)) 
+        elif (values['speed'] < (-50)) :
             print("test -----------------")   
         yield (b'--frame\r\n'
                b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
