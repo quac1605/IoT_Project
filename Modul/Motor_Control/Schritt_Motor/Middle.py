@@ -7,5 +7,5 @@ import PWM
 
 
 def middle():
-    PWM.set(1.47,13)
+    PWM.set(1.472,13)
 middle()
