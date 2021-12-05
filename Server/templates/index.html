@@ -30,13 +30,13 @@
 			});
 
 			// catching keyboard event with JQuer
-			var speed_step = 0;
+			var speed_step = (-6);
 			$(this).keydown(function (event) {
 				event.preventDefault();
-				if ((event.code === "ArrowDown") && (parseInt($('#' + 'speed').val()) == 0) && (speed_step != 0)) {
+				if ((event.code === "ArrowDown") && (parseInt($('#' + 'speed').val()) == (-6)) && (speed_step != (-6))) {
 					// Handle "down"
 					$('#' + 'speed').val(parseInt(-speed_step)).trigger('input');
-				} else if ((event.code === "ArrowUp") && (parseInt($('#' + 'speed').val()) == 0) && (speed_step != 0)) {
+				} else if ((event.code === "ArrowUp") && (parseInt($('#' + 'speed').val()) == (-6)) && (speed_step != (-6))) {
 					// Handle "up"
 					$('#' + 'speed').val(parseInt(speed_step)).trigger('input');
 				} else if ((event.code === "ArrowLeft") && (parseInt($('#' + 'angle').val()) == 0)) {
@@ -68,7 +68,7 @@
 			});
 			$(this).keyup(function (event) {
 				event.preventDefault();
-				if (event.code === "ArrowDown" || event.code === "ArrowUp") {
+				if ((event.code === "ArrowDown" || event.code === "ArrowUp") && (parseInt($('#' + 'speed').val()) != (-6))) {
 					$('#' + 'speed').val(-6).trigger('input');
 				} else if (event.code === "ArrowLeft" || event.code === "ArrowRight") {
 					$('#' + 'angle').val(0).trigger('input');
