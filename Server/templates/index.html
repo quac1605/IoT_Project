@@ -41,10 +41,10 @@
 					$('#' + 'speed').val(parseInt(speed_step)).trigger('input');
 				} else if ((event.code === "ArrowLeft") && (parseInt($('#' + 'angle').val()) == 0)) {
 					// Handle "left"
-					$('#' + 'angle').val(-86).trigger('input');
+					$('#' + 'angle').val(-100).trigger('input');
 				} else if ((event.code === "ArrowRight") && (parseInt($('#' + 'angle').val()) == 0)) {
 					// Handle "right"
-					$('#' + 'angle').val(86).trigger('input');
+					$('#' + 'angle').val(100).trigger('input');
 				} else if (event.code === "KeyS") {		//to stop
 					$('#' + 'angle').val(0).trigger('input');
 					$('#' + 'speed').val(0).trigger('input');
