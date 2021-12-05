@@ -7,6 +7,7 @@ videoStreamBp = Blueprint('video_feed', __name__)
 from camera_pi import VideoCamera
 pi_camera = VideoCamera(flip=False)
 # Raspberry Pi camera module (requires picamera package)
+values = None
 def gen_frames(camera):  
     # get camera frame
     global values
