@@ -7,7 +7,7 @@ class VideoCamera(object):
     def __init__(self, resolution=(480, 360), framerate=60,flip = False):
         self.vs = PiVideoStream().start()
         self.flip = flip
-        time.sleep(0.5)
+        time.sleep(2.0)
 
     def __del__(self):
         self.vs.stop()
