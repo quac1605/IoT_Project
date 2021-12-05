@@ -1,5 +1,6 @@
 import cv2
 from imutils.video.pivideostream import PiVideoStream
+import imutils
 import time
 import numpy as np
 
