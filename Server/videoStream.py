@@ -4,6 +4,7 @@ import cv2
 
 videoStreamBp = Blueprint('video_feed', __name__)
 
+#vvalues to control with OpenCV
 auto_values = {
     'speed': 0,
     'angle': 0,

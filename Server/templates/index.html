@@ -29,28 +29,49 @@
 				$('#' + msg.who).val(msg.data);
 			});
 
-			// catching keyboard event with JQuery
+			// catching keyboard event with JQuer
+			var speed_step = 0;
 			$(this).keydown(function (event) {
 				event.preventDefault();
-				if (event.code === "ArrowDown") {
+				if ((event.code === "ArrowDown") && (parseInt($('#' + 'speed').val()) === 0)) {
 					// Handle "down"
-					$('#' + 'speed').val(test_input(parseInt($('#' + 'speed').val()) - parseInt(20))).trigger('input');
-				} else if (event.code === "ArrowUp") {
+					$('#' + 'speed').val(parseInt(-speed_step)).trigger('input');
+				} else if ((event.code === "ArrowUp") && (parseInt($('#' + 'speed').val()) === 0)) {
 					// Handle "up"
-					$('#' + 'speed').val(test_input(parseInt($('#' + 'speed').val()) + parseInt(20))).trigger('input');
-				} else if (event.code === "ArrowLeft") {
+					$('#' + 'speed').val(parseInt(speed_step)).trigger('input');
+				} else if ((event.code === "ArrowLeft") && (parseInt($('#' + 'angle').val()) === 0)) {
 					// Handle "left"
-					$('#' + 'angle').val(test_input(parseInt($('#' + 'angle').val()) - parseInt(25))).trigger('input');
-				} else if (event.code === "ArrowRight") {
+					$('#' + 'angle').val(-100).trigger('input');
+				} else if ((event.code === "ArrowRight") && (parseInt($('#' + 'angle').val()) === 0)) {
 					// Handle "right"
-					$('#' + 'angle').val(test_input(parseInt($('#' + 'angle').val()) + parseInt(25))).trigger('input');
+					$('#' + 'angle').val(100).trigger('input');
 				} else if (event.code === "KeyS") {		//to stop
 					$('#' + 'angle').val(0).trigger('input');
 					$('#' + 'speed').val(0).trigger('input');
-				} else if (event.code === "KeyA") {
-					$('#' + 'mode').val('auto').trigger('input');
+				} else if (event.code === "Digit1") {
+					speed_step = 35
+				} else if (event.code === "Digit2") {
+					speed_step = 50
+				} else if (event.code === "Digit3") {
+					speed_step = 75
+				} else if (event.code === "Digit4") {
+					speed_step = 100
+				} else if (event.code === "Digit1") {
+					speed_step = 0
 				} else if (event.code === "KeyM") {
-					$('#' + 'mode').val('manuell').trigger('input');
+					if ($('#' + 'mode').val() ==='auto') {
+						$('#' + 'mode').val('auto').trigger('input');
+					} else {
+						$('#' + 'mode').val('manuell').trigger('input');
+					}
+				}
+			});
+			$(this).keyup(function (event) {
+				event.preventDefault();
+				if (event.code === "ArrowDown" || event.code === "ArrowUp") {
+					$('#' + 'speed').val(0).trigger('input');
+				} else if (event.code === "ArrowLeft" || event.code === "ArrowRight") {
+					$('#' + 'angle').val(0).trigger('input');
 				}
 			});
 			function test_input(x) {
@@ -68,8 +89,8 @@
 
 <body>
 	<div class="container text-center">
-			<h1>IOT CAR</h1>
-			<img src="{{ url_for('video_feed.video_feed') }}" />
+		<h1>IOT CAR</h1>
+		<img src="{{ url_for('video_feed.video_feed') }}" />
 		<form class="mt-5">
 			<div class="form-group">
 				<label for="formControl">Speed</label>
