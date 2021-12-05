@@ -49,10 +49,10 @@ def thread1(threadname, val):
     global values
     while True:
         if values['speed'] is None: return # Poison pill
-        ctrl.speed(int(speed))
+        ctrl.speed(int(values['speed']))
         #print("speed in control_thread",values['speed'])
         if values['angle'] is None: return
-        ctrl.grad(int(angle))
+        ctrl.grad(int(values['angle']))
         #print("angle in control_thread",values['angle'])
         sleep(0.1)
 
