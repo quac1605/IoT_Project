@@ -57,5 +57,5 @@ thread1 = Thread( target=thread1, args=("Thread-1", values) )
 
 if __name__ == '__main__':
    # thread1.start()
-    socketio.run(app,host='0.0.0.0', port=5000, debug=False)
+    socketio.run(app,host='0.0.0.0', port=5000, debug=True)
    # thread1.join()
