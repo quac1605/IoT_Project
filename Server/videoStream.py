@@ -4,18 +4,23 @@ import cv2
 
 videoStreamBp = Blueprint('video_feed', __name__)
 
+test_values = {
+    'speed' : 0,
+    "angle" : 0,
+}
+
 from camera_pi import VideoCamera
 pi_camera = VideoCamera(flip=False)
 # Raspberry Pi camera module (requires picamera package)
 values = None
 def gen_frames(camera):  
     # get camera frame
-    global values
+    global test_values
     while True:
         frame = camera.get_frame()
-        if (values['speed'] > 50):
+        if (test_values['speed'] > 50):
             print("test ++++++++++++++++++++")
-        elif (values['speed'] < (-50)) :
+        elif (test_values['speed'] < (-50)) :
             print("test -----------------")   
         yield (b'--frame\r\n'
                b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')

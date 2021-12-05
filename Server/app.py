@@ -21,7 +21,7 @@ values = {
 }
 
 #Add Streaming Video to this Web throw Blueprint
-from videoStream import videoStreamBp
+from videoStream import videoStreamBp, test_values
 app.register_blueprint(videoStreamBp)
 
 #Create  GUI for namespace "/"
@@ -39,7 +39,9 @@ def test_connect():
 @socketio.on('Value changed', namespace='/control')
 def value_changed(message):
     global values
+    global test_values
     values[message['who']] = message['data']
+    test_values[message['who']] = message['data']
     emit('Sever updated value', message, broadcast=True, namespace='/control')
     print(message['data'])
 
