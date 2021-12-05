@@ -5,8 +5,8 @@ sys.path.insert(0, "//home//pi//Desktop//IoT_Project//Modul//Motor_Control")
 
 import PWM
 
-max_speed = 1.555
-min_speed = 1.455
+max_speed = 1.558
+min_speed = 1.456
 
 def run(percent):
     ms = min_speed + ((max_speed - min_speed)/100*percent)
