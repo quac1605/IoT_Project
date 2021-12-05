@@ -69,7 +69,7 @@
 			$(this).keyup(function (event) {
 				event.preventDefault();
 				if (event.code === "ArrowDown" || event.code === "ArrowUp") {
-					$('#' + 'speed').val(0).trigger('input');
+					$('#' + 'speed').val(-6).trigger('input');
 				} else if (event.code === "ArrowLeft" || event.code === "ArrowRight") {
 					$('#' + 'angle').val(0).trigger('input');
 				}
