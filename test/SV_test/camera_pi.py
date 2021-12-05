@@ -3,7 +3,7 @@ from imutils.video.pivideostream import PiVideoStream
 import time
 import numpy as np
 
-class VideoCamera(object):
+class Camera(object):
     def __init__(self, resolution=(480, 360), framerate=60,flip = False):
         self.vs = PiVideoStream().start()
         self.flip = flip
