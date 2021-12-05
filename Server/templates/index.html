@@ -47,6 +47,10 @@
 				} else if (event.code === "KeyS") {		//to stop
 					$('#' + 'angle').val(0).trigger('input');
 					$('#' + 'speed').val(0).trigger('input');
+				} else if (event.code === "KeyA") {
+					$('#' + 'mode').val('auto').trigger('input');
+				} else if (event.code === "KeyM") {
+					$('#' + 'mode').val('auto').trigger('manuell');
 				}
 			});
 			function test_input(x) {
@@ -74,6 +78,10 @@
 			<div class="form-group">
 				<label for="formControl">Angle</label>
 				<input type="text" class="form-control-range sync" id="angle" value={{angle}} readonly>
+			</div>
+			<div class="form-group">
+				<label for="formControl">Mode</label>
+				<input type="text" class="form-control-range sync" id="mode" value={{mode}} readonly>
 			</div>
 		</form>
 	</div>

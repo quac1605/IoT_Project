@@ -15,19 +15,20 @@ thread1 = None
 thread_lock = Lock()
 
 #Datas to control Car
-values = {
+control_values = {
     'speed': 0,
     'angle': 0,
+    'mode':'manuell'
 }
 
 #Add Streaming Video to this Web throw Blueprint
-from videoStream import videoStreamBp, test_values
+from videoStream import videoStreamBp, auto_values
 app.register_blueprint(videoStreamBp)
 
 #Create  GUI for namespace "/"
 @app.route('/')
 def index():
-    return render_template('index.html',**values)
+    return render_template('index.html',**control_values)
   
 #Try to catch connect signal from namespace "/control"
 @socketio.on('connect', namespace='/control')
@@ -38,27 +39,28 @@ def test_connect():
 #Catch control value throw socket io in "/control", use this to set shared values to control Car and tell the User that value changed successfully 
 @socketio.on('Value changed', namespace='/control')
 def value_changed(message):
-    global values
-    global test_values
-    values[message['who']] = message['data']
-    test_values[message['who']] = message['data']
+    global control_values
+    control_values[message['who']] = message['data']
     emit('Sever updated value', message, broadcast=True, namespace='/control')
     print(message['data'])
 
 """Create Another Thread to Control the Car"""
 def thread1(threadname, val):
     #read variable "a" modify by thread 2
-    global values
+    global control_values
+    global auto_values
     while True:
-        if values['speed'] is None: return # Poison pill
-        #ctrl.speed(int(values['speed']))
-        #print("speed in control_thread",values['speed'])
-        if values['angle'] is None: return
-        #ctrl.grad(int(values['angle']))
-        #print("angle in control_thread",values['angle'])
+        #auto mode
+        if (control_values['mode'] == 'auto'):
+            ctrl.speed(int(auto_values['speed']))
+            ctrl.grad(int(auto_values['angle']))
+        #code for manuell
+        elif (control_values['mode'] == 'manuell'):
+            ctrl.speed(int(control_values['speed']))
+            ctrl.grad(int(control_values['angle']))
         sleep(0.1)
 
-thread1 = Thread( target=thread1, args=("Thread-1", values) )
+thread1 = Thread( target=thread1, args=("Thread-1", control_values) )
 
 if __name__ == '__main__':
     thread1.start()
