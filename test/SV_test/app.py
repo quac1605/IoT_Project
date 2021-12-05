@@ -5,7 +5,7 @@ from threading import Lock
 app = Flask(__name__)
 #for socket
 async_mode = None
-socketio = SocketIO(app, async_mode=async_mode)
+socketio = SocketIO(app, async_mode='threading')
 #thread = None
 thread1 = None
 thread_lock = Lock()
