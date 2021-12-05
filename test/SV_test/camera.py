@@ -1,48 +1,54 @@
+import time
+import io
 import threading
-import binascii
-from time import sleep
-from utils import base64_to_pil_image, pil_image_to_base64
+import picamera
 
 
 class Camera(object):
-    def __init__(self, makeup_artist):
-        self.to_process = []
-        self.to_output = []
-        self.makeup_artist = makeup_artist
+    thread = None  # background thread that reads frames from camera
+    frame = None  # current frame is stored here by background thread
+    last_access = 0  # time of last client access to the camera
 
-        thread = threading.Thread(target=self.keep_processing, args=())
-        thread.daemon = True
-        thread.start()
+    def initialize(self):
+        if Camera.thread is None:
+            # start background frame thread
+            Camera.thread = threading.Thread(target=self._thread)
+            Camera.thread.start()
 
-    def process_one(self):
-        if not self.to_process:
-            return
-
-        # input is an ascii string. 
-        input_str = self.to_process.pop(0)
-
-        # convert it to a pil image
-        input_img = base64_to_pil_image(input_str)
-
-        ################## where the hard work is done ############
-        # output_img is an PIL image
-        output_img = self.makeup_artist.apply_makeup(input_img)
-
-        # output_str is a base64 string in ascii
-        output_str = pil_image_to_base64(output_img)
-
-        # convert eh base64 string in ascii to base64 string in _bytes_
-        self.to_output.append(binascii.a2b_base64(output_str))
-
-    def keep_processing(self):
-        while True:
-            self.process_one()
-            sleep(0.01)
-
-    def enqueue_input(self, input):
-        self.to_process.append(input)
+            # wait until frames start to be available
+            while self.frame is None:
+                time.sleep(0)
 
     def get_frame(self):
-        while not self.to_output:
-            sleep(0.05)
-        return self.to_output.pop(0)
+        Camera.last_access = time.time()
+        self.initialize()
+        return self.frame
+
+    @classmethod
+    def _thread(cls):
+        with picamera.PiCamera() as camera:
+            # camera setup
+            camera.resolution = (320, 240)
+            camera.hflip = True
+            camera.vflip = True
+
+            # let camera warm up
+            camera.start_preview()
+            time.sleep(2)
+
+            stream = io.BytesIO()
+            for foo in camera.capture_continuous(stream, 'jpeg',
+                                                 use_video_port=True):
+                # store frame
+                stream.seek(0)
+                cls.frame = stream.read()
+
+                # reset stream for next frame
+                stream.seek(0)
+                stream.truncate()
+
+                # if there hasn't been any clients asking for frames in
+                # the last 10 seconds stop the thread
+                if time.time() - cls.last_access > 10:
+                    break
+        cls.thread = None
