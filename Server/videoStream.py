@@ -19,7 +19,7 @@ def gen_frames(camera):
     global auto_values
     while True:
         frame = camera.get_frame()
-        cv2.imwrite("frame.jpeg" , frame)
+        #cv2.imwrite("frame.jpeg" , frame)
     # Su dung OpenCV cua Khanh o day de return ra angle
         yield (b'--frame\r\n'
                b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
