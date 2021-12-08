@@ -41,7 +41,7 @@ def test_connect():
 def value_changed(message):
     global control_values
     control_values[message['who']] = message['data']
-    emit('Sever updated value', message, broadcast=True, namespace='/control')
+    #emit('Sever updated value', message, broadcast=True, namespace='/control')
     print(message['data'])
 
 """Create Another Thread to Control the Car"""
