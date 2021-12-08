@@ -4,7 +4,7 @@ import time
 import numpy as np
 
 class VideoCamera(object):
-    def __init__(self, resolution=(640,480), framerate=60,flip = False):
+    def __init__(self, resolution=(480,360), framerate=60,flip = False):
         self.vs = PiVideoStream().start()
         self.flip = flip
         time.sleep(2.0)
@@ -19,5 +19,6 @@ class VideoCamera(object):
 
     def get_frame(self):
         frame = self.flip_if_needed(self.vs.read())
+        cv2.imwrite("frame.jpg" , frame)
         ret, jpeg = cv2.imencode('.jpg', frame)
         return jpeg.tobytes()
