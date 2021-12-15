@@ -16,7 +16,7 @@ class VideoCamera(object):
     def __init__(self, resolution=(480,320), framerate=120,flip = False):
         self.vs = PiVideoStream().start()
         self.flip = flip
-        time.sleep(2.0)
+        time.sleep(1.0)
 
     def __del__(self):
         self.vs.stop()
@@ -27,7 +27,15 @@ class VideoCamera(object):
         return frame
 
     def get_frame(self):
+        i = 0
+        test = 0
         frame = self.flip_if_needed(self.vs.read())
         ret, jpeg = cv2.imencode('.jpg', frame)
-        auto_values['angle'] = -(detect_lane(frame) * 0.8)
+        #auto_values['angle'] = -(detect_lane(frame) * 0.8)
+        if (i == 10):
+            auto_values['angle'] = test/10
+            i= 0
+        else:
+            test = test -(detect_lane(frame) * 0.8)
+            i = i + 1
         return jpeg.tobytes()
