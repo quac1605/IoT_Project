@@ -1,6 +1,11 @@
 from flask import Blueprint, Flask, render_template, Response
 
 import cv2
+#import line_CV
+import sys
+
+sys.path.insert(0, "../OPEN_CV")
+from Line_Detection import detect_lane
 
 videoStreamBp = Blueprint('video_feed', __name__)
 
@@ -20,6 +25,7 @@ def gen_frames(camera):
     while True:
         frame = camera.get_frame()
     # Su dung OpenCV cua Khanh o day de return ra angle
+        auto_values['angle'] = detect_lane(frame)
         yield (b'--frame\r\n'
                b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
 

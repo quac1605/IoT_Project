@@ -54,6 +54,7 @@ def thread1(threadname, val):
         if (control_values['mode'] == 'auto'):
             ctrl.speed(int(auto_values['speed']))
             ctrl.grad(int(auto_values['angle']))
+            print(int(auto_values['angle']))
         #code for manuell
         elif (control_values['mode'] == 'manuell'):
             ctrl.speed(int(control_values['speed']))
