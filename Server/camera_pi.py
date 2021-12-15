@@ -35,7 +35,7 @@ class VideoCamera(object):
         ret, jpeg = cv2.imencode('.jpg', frame)
         #auto_values['angle'] = -(detect_lane(frame) * 0.8)
         if (i == 10):
-            auto_values['angle'] = test/10
+            auto_values['angle'] = (test/10)*2
             print(auto_values['angle'])
             i= 0
             test = 0
