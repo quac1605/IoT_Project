@@ -14,6 +14,7 @@ auto_values = {
     'speed': 0,
     'angle': 0,
 }
+frame = cv2.imread('saved-test-image.jpg')
 
 from camera_pi import VideoCamera
 pi_camera = VideoCamera(flip=False)
