@@ -8,7 +8,7 @@ sys.path.insert(0, "../OPEN_CV")
 from Line_Detection import detect_lane
 
 auto_values = {
-    'speed': 0,
+    'speed': 30,
     'angle': 0,
 }
 class VideoCamera(object):
