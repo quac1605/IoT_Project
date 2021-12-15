@@ -1,5 +1,6 @@
 from flask import Flask, render_template, Response, request
 from flask_socketio import SocketIO, emit
+import cv2
 from time import sleep
 from threading import Thread, Lock
 import sys
