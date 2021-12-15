@@ -6,11 +6,7 @@ import sys
 
 videoStreamBp = Blueprint('video_feed', __name__)
 
-#vvalues to control with OpenCV
-auto_values = {
-    'speed': 0,
-    'angle': 0,
-}
+#avoid crash
 frame = cv2.imread('saved-test-image.jpg')
 
 from camera_pi import VideoCamera
@@ -18,8 +14,7 @@ pi_camera = VideoCamera(flip=False)
 # Raspberry Pi camera module (requires picamera package)
 values = None
 def gen_frames(camera):  
-    # get camera frame
-    global auto_values
+    # get camera frame and public to global
     global frame
     while True:
         frame = camera.get_frame()

@@ -1,6 +1,5 @@
 from flask import Flask, render_template, Response, request
 from flask_socketio import SocketIO, emit
-import cv2
 from time import sleep
 from threading import Thread, Lock
 import sys
@@ -20,6 +19,11 @@ control_values = {
     'speed': 0,
     'angle': 0,
     'mode':'manuell'
+}
+
+auto_values = {
+    'speed': 0,
+    'angle': 0,
 }
 
 sys.path.insert(0, "../OPEN_CV")
@@ -57,7 +61,6 @@ def thread1(threadname, val):
         #auto mode
         if (control_values['mode'] == 'auto'):
             auto_values['angle'] = detect_lane(frame)
-            savedImage = cv2.imwrite("saved-test-image_okok.jpg",frame)
             ctrl.speed(int(auto_values['speed']))
             ctrl.grad(int(auto_values['angle']))
             print(int(auto_values['angle']))
