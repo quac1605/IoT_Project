@@ -15,8 +15,6 @@ i = 0
 test = 0
 class VideoCamera(object):
     global auto_values
-    global i
-    global test
     def __init__(self, resolution=(480,320), framerate=120,flip = False):
         self.vs = PiVideoStream().start()
         self.flip = flip
@@ -31,6 +29,8 @@ class VideoCamera(object):
         return frame
 
     def get_frame(self):
+        global i
+        global test
         frame = self.flip_if_needed(self.vs.read())
         ret, jpeg = cv2.imencode('.jpg', frame)
         #auto_values['angle'] = -(detect_lane(frame) * 0.8)
