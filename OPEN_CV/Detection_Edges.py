@@ -5,14 +5,14 @@ import sys
 
 def detection_edges(frame):
 	#import piture
-	frame = cv2.imread('F:/FH_Kiel/Projekt/Autonomous_Car/OPEN_CV/line_3.jpg')
+
 	hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
 
 
 
 	#define white range
-	lower_white = np.array([123, 116, 116])
-	upper_white = np.array([186, 172, 160])
+	lower_white = np.array([0, 0, 160])
+	upper_white = np.array([179, 50, 255])
 
 	#mask erstellen
 	mask = cv2.inRange(hsv,lower_white,upper_white)
