@@ -23,6 +23,6 @@ class VideoCamera(object):
     def get_frame(self):
         frame = self.flip_if_needed(self.vs.read())
         ret, jpeg = cv2.imencode('.jpg', frame)
-        test = detect_lane(jpeg)
+        test = detect_lane(frame)
         print(test)
         return jpeg.tobytes()
