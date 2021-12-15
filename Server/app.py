@@ -21,8 +21,11 @@ control_values = {
     'mode':'manuell'
 }
 
+sys.path.insert(0, "../OPEN_CV")
+from Line_Detection import detect_lane
+
 #Add Streaming Video to this Web throw Blueprint
-from videoStream import videoStreamBp, auto_values
+from videoStream import videoStreamBp, auto_values, frame
 app.register_blueprint(videoStreamBp)
 
 #Create  GUI for namespace "/"
@@ -52,6 +55,7 @@ def thread1(threadname, val):
     while True:
         #auto mode
         if (control_values['mode'] == 'auto'):
+            auto_values['angle'] = detect_lane(frame)
             ctrl.speed(int(auto_values['speed']))
             ctrl.grad(int(auto_values['angle']))
             print(int(auto_values['angle']))

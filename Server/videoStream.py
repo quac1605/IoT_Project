@@ -22,12 +22,14 @@ values = None
 def gen_frames(camera):  
     # get camera frame
     global auto_values
+    global frame
     while True:
         frame = camera.get_frame()
     # Su dung OpenCV cua Khanh o day de return ra angle
-        savedImage = cv2.imwrite("saved-test-image.jpg",frame)
+        #savedImage = cv2.imwrite("saved-test-image.jpg",frame)
+
         yield (b'--frame\r\n'
-               b'Content-Type: image/jpeg\r\n\r\n' + open('saved-test-image.jpg', 'rb').read() + b'\r\n\r\n')
+               b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
 
 @videoStreamBp.route('/video_feed')
 def video_feed():
