@@ -44,4 +44,4 @@ class VideoCamera(object):
             test = test + cc
             i = i + 1
         #return jpeg.tobytes()
-        return frame.tobytes()
+        return frame
