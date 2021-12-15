@@ -43,4 +43,5 @@ class VideoCamera(object):
             cc, frame = detect_lane(frame)
             test = test + cc
             i = i + 1
-        return jpeg.tobytes()
+        #return jpeg.tobytes()
+        return frame.tobytes()
