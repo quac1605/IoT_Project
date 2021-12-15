@@ -7,9 +7,6 @@ import sys
 sys.path.insert(0, "..//Modul//Motor_Control")
 import Control as ctrl
 
-sys.path.insert(0, "../OPEN_CV")
-from Line_Detection import detect_lane
-
 app = Flask(__name__)
 #for socket
 socketio = SocketIO(app, async_mode='threading')
@@ -23,11 +20,8 @@ control_values = {
     'angle': 0,
     'mode':'manuell'
 }
+from camera_pi import auto_values
 
-auto_values = {
-    'speed': 0,
-    'angle': 0,
-}
 
 
 #Add Streaming Video to this Web throw Blueprint
@@ -61,10 +55,9 @@ def thread1(threadname, val):
     while True:
         #auto mode
         if (control_values['mode'] == 'auto'):
-            auto_values['angle'] = detect_lane(frame)
+            #auto_values['angle'] = detect_lane(frame)
             ctrl.speed(int(auto_values['speed']))
             ctrl.grad(int(auto_values['angle']))
-            print(int(auto_values['angle']))
         #code for manuell
         elif (control_values['mode'] == 'manuell'):
             ctrl.speed(int(control_values['speed']))
