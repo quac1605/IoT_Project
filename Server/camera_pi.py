@@ -3,10 +3,16 @@ from imutils.video.pivideostream import PiVideoStream
 import time
 import numpy as np
 import sys
+
 sys.path.insert(0, "../OPEN_CV")
 from Line_Detection import detect_lane
 
+auto_values = {
+    'speed': 0,
+    'angle': 0,
+}
 class VideoCamera(object):
+    global auto_values
     def __init__(self, resolution=(480,320), framerate=120,flip = False):
         self.vs = PiVideoStream().start()
         self.flip = flip
@@ -23,6 +29,5 @@ class VideoCamera(object):
     def get_frame(self):
         frame = self.flip_if_needed(self.vs.read())
         ret, jpeg = cv2.imencode('.jpg', frame)
-        test = detect_lane(frame)
-        print(test)
+        auto_values['angle'] = detect_lane(frame)
         return jpeg.tobytes()
