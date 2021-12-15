@@ -8,7 +8,7 @@ sys.path.insert(0, "../OPEN_CV")
 from Line_Detection import detect_lane
 
 auto_values = {
-    'speed': 45,
+    'speed': 40,
     'angle': 0,
 }
 class VideoCamera(object):
@@ -29,5 +29,5 @@ class VideoCamera(object):
     def get_frame(self):
         frame = self.flip_if_needed(self.vs.read())
         ret, jpeg = cv2.imencode('.jpg', frame)
-        auto_values['angle'] = detect_lane(frame)
+        auto_values['angle'] = detect_lane(frame) * 2
         return jpeg.tobytes()
