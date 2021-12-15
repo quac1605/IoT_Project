@@ -28,7 +28,7 @@ def detect_lane(frame):
 	line_segments = Detect_Line_Segment.detect_line_segments(cropped_edges)
 	lane_lines = Combine_Line_Segments.average_slope_intercept(frame, line_segments)
 	#take lmid_ane_line
-	if (len(lane_lines)):
+	if (len(lane_lines) == 2):
 		first_lane_line = lane_lines[0]
 		second_lane_line = lane_lines[1]
 		line_image = np.zeros_like(frame)
