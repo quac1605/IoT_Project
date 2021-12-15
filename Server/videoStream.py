@@ -25,7 +25,7 @@ def gen_frames(camera):
     while True:
         frame = camera.get_frame()
     # Su dung OpenCV cua Khanh o day de return ra angle
-        auto_values['angle'] = detect_lane(frame)
+        auto_values['angle'] = detect_lane('./saved-test-image.jpg')
         yield (b'--frame\r\n'
                b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
 
