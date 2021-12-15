@@ -36,7 +36,7 @@ def detect_lane(frame):
 		end_mid_line =  [int((first_lane_line[2]+second_lane_line[2])/2),int((first_lane_line[3]+second_lane_line[3])/2)]
 		#caculate angle
 		x_offset = start_mid_line[0] - end_mid_line[0]
-		y_offset = start_mid_line[1] - end_mid_line[1]
+		y_offset = end_mid_line[1] - start_mid_line[1]
 		if (y_offset):
 			angle_to_mid_line = math.atan(x_offset/y_offset) * 180 / math.pi
 		else:
