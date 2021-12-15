@@ -56,6 +56,7 @@ def thread1(threadname, val):
         #auto mode
         if (control_values['mode'] == 'auto'):
             auto_values['angle'] = detect_lane(frame)
+            savedImage = cv2.imwrite("saved-test-image_okok.jpg",frame)
             ctrl.speed(int(auto_values['speed']))
             ctrl.grad(int(auto_values['angle']))
             print(int(auto_values['angle']))
