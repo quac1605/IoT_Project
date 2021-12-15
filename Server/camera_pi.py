@@ -2,6 +2,9 @@ import cv2
 from imutils.video.pivideostream import PiVideoStream
 import time
 import numpy as np
+import sys
+sys.path.insert(0, "../OPEN_CV")
+from Line_Detection import detect_lane
 
 class VideoCamera(object):
     def __init__(self, resolution=(480,320), framerate=120,flip = False):
@@ -20,4 +23,6 @@ class VideoCamera(object):
     def get_frame(self):
         frame = self.flip_if_needed(self.vs.read())
         ret, jpeg = cv2.imencode('.jpg', frame)
+        test = detect_lane(jpeg)
+        print(test)
         return jpeg.tobytes()
