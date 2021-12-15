@@ -21,10 +21,10 @@ def gen_frames(camera):
     # Su dung OpenCV cua Khanh o day de return ra angle
         yield (b'--frame\r\n'
                b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
-       '''
-       yield (b'--frame\r\n'
-               b'Content-Type: image/jpeg\r\n\r\n' + open('video_image.jpg', 'rb').read() + b'\r\n\r\n')
-        '''
+       
+#       yield (b'--frame\r\n'
+#               b'Content-Type: image/jpeg\r\n\r\n' + open('video_image.jpg', 'rb').read() + b'\r\n\r\n')
+    
                
 
 @videoStreamBp.route('/video_feed')
