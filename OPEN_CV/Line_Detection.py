@@ -20,7 +20,6 @@ frame = cv2.resize(read_frame,(480,320))
 height,width = frame.shape[:2]
 
 '''
-
 def detect_lane(frame):
 	#frame = cv2.imread(frame_url)
 	edges = Detection_Edges.detection_edges(frame)
@@ -34,6 +33,9 @@ def detect_lane(frame):
 		line_image = np.zeros_like(frame)
 		start_mid_line = [int((first_lane_line[0]+second_lane_line[0])/2),int((first_lane_line[1]+second_lane_line[1])/2)] #lam sao de su dung float
 		end_mid_line =  [int((first_lane_line[2]+second_lane_line[2])/2),int((first_lane_line[3]+second_lane_line[3])/2)]
+		cv2.line(line_image,(start_mid_line[0],start_mid_line[1]),(end_mid_line[0],end_mid_line[1]), (0,0,255),10)
+		line_image = cv2.addWeighted(frame, 0.8, line_image, 1, 1)
+		cv2.imshow("lane lines", line_image)
 		#caculate angle
 		x_offset = start_mid_line[0] - end_mid_line[0]
 		y_offset = end_mid_line[1] - start_mid_line[1]
