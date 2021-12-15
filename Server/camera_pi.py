@@ -35,11 +35,11 @@ class VideoCamera(object):
         ret, jpeg = cv2.imencode('.jpg', frame)
         #auto_values['angle'] = -(detect_lane(frame) * 0.8)
         if (i == 10):
-            auto_values['angle'] = (test/10)*2
+            auto_values['angle'] = (test/10)
             print(auto_values['angle'])
             i= 0
             test = 0
         else:
-            test = test + (detect_lane(frame) * 1)
+            test = test + (detect_lane(frame) * 1.5)
             i = i + 1
         return jpeg.tobytes()
