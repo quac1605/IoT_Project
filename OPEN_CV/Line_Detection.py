@@ -28,15 +28,18 @@ def detect_lane(frame):
 	line_segments = Detect_Line_Segment.detect_line_segments(cropped_edges)
 	lane_lines = Combine_Line_Segments.average_slope_intercept(frame, line_segments)
 	#take lmid_ane_line
-	first_lane_line = lane_lines[0]
-	second_lane_line = lane_lines[1]
-	line_image = np.zeros_like(frame)
-	start_mid_line = [int((first_lane_line[0]+second_lane_line[0])/2),int((first_lane_line[1]+second_lane_line[1])/2)] #lam sao de su dung float
-	end_mid_line =  [int((first_lane_line[2]+second_lane_line[2])/2),int((first_lane_line[3]+second_lane_line[3])/2)]
-	#caculate angle
-	x_offset = start_mid_line[0] - end_mid_line[0]
-	y_offset = end_mid_line[0] - end_mid_line[1]
-	angle_to_mid_line = math.atan(x_offset/y_offset) * 180 / math.pi
+	if (lane_lines.length != 0):
+		first_lane_line = lane_lines[0]
+		second_lane_line = lane_lines[1]
+		line_image = np.zeros_like(frame)
+		start_mid_line = [int((first_lane_line[0]+second_lane_line[0])/2),int((first_lane_line[1]+second_lane_line[1])/2)] #lam sao de su dung float
+		end_mid_line =  [int((first_lane_line[2]+second_lane_line[2])/2),int((first_lane_line[3]+second_lane_line[3])/2)]
+		#caculate angle
+		x_offset = start_mid_line[0] - end_mid_line[0]
+		y_offset = end_mid_line[0] - end_mid_line[1]
+		angle_to_mid_line = math.atan(x_offset/y_offset) * 180 / math.pi
+	else:
+		angle = 0
 	print(angle_to_mid_line)
 	return angle_to_mid_line
 
