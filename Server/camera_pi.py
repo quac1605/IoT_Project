@@ -8,7 +8,7 @@ sys.path.insert(0, "../OPEN_CV")
 from Line_Detection import detect_lane
 
 auto_values = {
-    'speed': 0,
+    'speed': 40,
     'angle': 0,
 }
 i = 0
