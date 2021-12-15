@@ -13,6 +13,7 @@ auto_values = {
 }
 class VideoCamera(object):
     global auto_values
+    i = 0
     def __init__(self, resolution=(480,320), framerate=120,flip = False):
         self.vs = PiVideoStream().start()
         self.flip = flip
@@ -27,7 +28,6 @@ class VideoCamera(object):
         return frame
 
     def get_frame(self):
-        i = 0
         test = 0
         frame = self.flip_if_needed(self.vs.read())
         ret, jpeg = cv2.imencode('.jpg', frame)
