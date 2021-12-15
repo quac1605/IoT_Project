@@ -39,7 +39,6 @@ def detect_lane(frame):
 	print(angle_to_mid_line)
 	return angle_to_mid_line
 
-test = detect_lane(frame)
 '''
 lane_lines = detect_lane(frame)
 
