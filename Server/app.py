@@ -4,8 +4,11 @@ from time import sleep
 from threading import Thread, Lock
 import sys
 
-sys.path.insert(0, "//home//pi//Desktop//IoT_Project//Modul//Motor_Control")
+sys.path.insert(0, "..//Modul//Motor_Control")
 import Control as ctrl
+
+sys.path.insert(0, "../OPEN_CV")
+from Line_Detection import detect_lane
 
 app = Flask(__name__)
 #for socket
@@ -26,11 +29,9 @@ auto_values = {
     'angle': 0,
 }
 
-sys.path.insert(0, "../OPEN_CV")
-from Line_Detection import detect_lane
 
 #Add Streaming Video to this Web throw Blueprint
-from videoStream import videoStreamBp, auto_values, frame
+from videoStream import videoStreamBp, frame
 app.register_blueprint(videoStreamBp)
 
 #Create  GUI for namespace "/"
