@@ -29,5 +29,5 @@ class VideoCamera(object):
     def get_frame(self):
         frame = self.flip_if_needed(self.vs.read())
         ret, jpeg = cv2.imencode('.jpg', frame)
-        auto_values['angle'] = -(detect_lane(frame) * 1.5)
+        auto_values['angle'] = -(detect_lane(frame) * 0.8)
         return jpeg.tobytes()
