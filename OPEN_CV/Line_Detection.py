@@ -10,7 +10,7 @@ import Combine_Line_Segments
 import f_make_point
 import logging
 import math
-
+'''
 #import piture
 read_frame = cv2.imread('./08_12_02_pic.PNG')
 frame = cv2.resize(read_frame,(480,320))
@@ -19,7 +19,7 @@ frame = cv2.resize(read_frame,(480,320))
 
 height,width = frame.shape[:2]
 
-
+'''
 
 def detect_lane(frame):
 	edges = Detection_Edges.detection_edges(frame)
