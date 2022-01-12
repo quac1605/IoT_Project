@@ -25,7 +25,7 @@ from camera_pi import auto_values
 
 
 #Add Streaming Video to this Web throw Blueprint
-from videoStream import videoStreamBp, frame, video_mode
+from videoStream import videoStreamBp, frame
 app.register_blueprint(videoStreamBp)
 
 #Create  GUI for namespace "/"
