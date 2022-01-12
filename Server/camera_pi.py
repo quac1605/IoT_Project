@@ -33,15 +33,15 @@ class VideoCamera(object):
         global test
         frame = self.flip_if_needed(self.vs.read())
         ret, jpeg = cv2.imencode('.jpg', frame)
-        auto_values['angle'] = -(detect_lane(frame) * 3)
-        '''
+        #auto_values['angle'] = -(detect_lane(frame) * 3)
+        
         if (i == 10):
             auto_values['angle'] = (test/10)
             print(auto_values['angle'])
             i= 0
             test = 0
         else:
-            test = test + (detect_lane(frame) * 1.5)
+            test = test + (detect_lane(frame) * 3)
             i = i + 1
-        '''
+        
         return jpeg.tobytes()
