@@ -25,7 +25,7 @@ from camera_pi import auto_values
 
 
 #Add Streaming Video to this Web throw Blueprint
-from videoStream import videoStreamBp, frame
+from videoStream import videoStreamBp, frame, video_mode
 app.register_blueprint(videoStreamBp)
 
 #Create  GUI for namespace "/"
@@ -52,8 +52,10 @@ def thread1(threadname, val):
     #read variable "a" modify by thread 2
     global control_values
     global auto_values
+    global video_mode
     while True:
         #auto mode
+        video_mode = control_values['mode']
         if (control_values['mode'] == 'auto'):
             #auto_values['angle'] = detect_lane(frame)
             ctrl.speed(int(auto_values['speed']))

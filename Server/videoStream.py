@@ -13,17 +13,21 @@ from camera_pi import VideoCamera
 pi_camera = VideoCamera(flip=False)
 # Raspberry Pi camera module (requires picamera package)
 values = None
+
+video_mode = 'manuell'
 def gen_frames(camera):  
     # get camera frame and public to global
     global frame
+    global video_mode
     while True:
         frame = camera.get_frame()
     # Su dung OpenCV cua Khanh o day de return ra angle
-        yield (b'--frame\r\n'
-               b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
-       
-#       yield (b'--frame\r\n'
-#               b'Content-Type: image/jpeg\r\n\r\n' + open('video_image.jpg', 'rb').read() + b'\r\n\r\n')
+        if (video_mode == 'manuell'):
+            yield (b'--frame\r\n'
+                b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
+        else:
+            yield (b'--frame\r\n'
+                    b'Content-Type: image/jpeg\r\n\r\n' + open('video_image.jpg', 'rb').read() + b'\r\n\r\n')
     
                
 
