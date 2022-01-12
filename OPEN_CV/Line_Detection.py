@@ -37,7 +37,7 @@ def detect_lane(frame):
 		
 		cv2.line(line_image,(start_mid_line[0],start_mid_line[1]),(end_mid_line[0],end_mid_line[1]), (0,0,255),10)
 		
-		line_image = cv2.addWeighted(frame, 0.8, line_image, 1, 1)
+		#line_image = cv2.addWeighted(frame, 0.8, line_image, 1, 1)
 		cv2.imwrite('video_image.jpg', line_image)
 		
 		#caculate angle
