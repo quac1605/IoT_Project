@@ -41,7 +41,7 @@ class VideoCamera(object):
             i= 0
             test = 0
         else:
-            test = test + (detect_lane(frame) * 4)
+            test = test + (detect_lane(frame) * 1)
             i = i + 1
         
         return jpeg.tobytes()
