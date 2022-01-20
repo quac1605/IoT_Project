@@ -53,7 +53,7 @@ def detect_lane(frame):
 		x_offset = first_lane_line[2] - first_lane_line[0]
 		y_offset = first_lane_line[3] - first_lane_line[1]
 		#add line
-		cv2.line(line_image,first_lane_line, (0,0,255),10)
+		cv2.line(line_image,(first_lane_line[0],first_lane_line[1]),(first_lane_line[0],first_lane_line[1]), (0,0,255),10)
 		line_image = cv2.addWeighted(frame, 0.8, line_image, 1, 1)
 		cv2.imwrite('video_image.jpg', line_image)
 
