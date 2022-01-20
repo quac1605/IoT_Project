@@ -36,6 +36,6 @@ class VideoCamera(object):
         elif (combine_value['angle'] - auto_values['angle'] <= -10):
             auto_values['angle'] = auto_values['angle'] - 10;
 
-        print('auto set angle = ',auto_values['angle'], 'auto set speed = ', auto_values['speed'])
+        
         
         return jpeg.tobytes()
