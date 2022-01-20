@@ -7,8 +7,8 @@ def cutting_image(edges):
 	mask = np.zeros_like(edges) #Return an array of zeros with the same shape and type as a given array
 
 	polygon = np.array([[
-		(0,height * 0.53),
-		(width,height * 0.53),
+		(0,height * 0.40),
+		(width,height * 0.40),
 		(width,height),
 		(0,height),
 		]],np.int32)
