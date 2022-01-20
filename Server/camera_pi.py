@@ -35,10 +35,10 @@ class VideoCamera(object):
         combine_value = detect_lane(frame)
         print('combine_value ', combine_value['angle'], 'old_value', old_value)
         auto_values['speed'] = combine_value['speed']
-        if ((combine_value['angle'] - old_value >= 10) and auto_values['angle'] <= 100):
-            auto_values['angle'] = auto_values['angle'] + 25;
-        elif ((combine_value['angle'] - old_value <= -10) and auto_values['angle'] >= -100):
-            auto_values['angle'] = auto_values['angle'] - 25;
+        if ((combine_value['angle'] - old_value >= 12) and auto_values['angle'] <= 100):
+            auto_values['angle'] = auto_values['angle'] + 20;
+        elif ((combine_value['angle'] - old_value <= -12) and auto_values['angle'] >= -100):
+            auto_values['angle'] = auto_values['angle'] - 20;
         old_value = combine_value['angle']
         
         
