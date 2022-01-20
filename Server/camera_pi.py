@@ -30,6 +30,7 @@ class VideoCamera(object):
         frame = self.flip_if_needed(self.vs.read())
         ret, jpeg = cv2.imencode('.jpg', frame)
         combine_value = detect_lane(frame)
+        print('combine_value ', combine_value['angle'])
         auto_values['speed'] = combine_value['speed']
         if ((combine_value['angle'] - auto_values['angle'] >= 10) and auto_values['angle'] <= 100):
             auto_values['angle'] = auto_values['angle'] + 10;

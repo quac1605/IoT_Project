@@ -58,12 +58,12 @@ def thread1(threadname, val):
             #auto_values['angle'] = detect_lane(frame)
             ctrl.speed(int(auto_values['speed']))
             ctrl.grad(int(auto_values['angle']))
-            print('auto set angle = ',auto_values['angle'], 'auto set speed = ', auto_values['speed'])
+            #print('auto set angle = ',auto_values['angle'], 'auto set speed = ', auto_values['speed'])
         #code for manuell
         elif (control_values['mode'] == 'manuell'):
             ctrl.speed(int(control_values['speed']))
             ctrl.grad(int(control_values['angle']))
-            print('manuell set angle = ',control_values['angle'], 'manuell set speed = ', control_values['speed'])
+            #print('manuell set angle = ',control_values['angle'], 'manuell set speed = ', control_values['speed'])
         sleep(0.1)
 
 thread1 = Thread( target=thread1, args=("Thread-1", control_values) )
