@@ -11,12 +11,14 @@
 		$(document).ready(function () {
 
 			// sending a connect request to the server.
+			var socket_ip = io.connect('http://192.168.8.21:5000/control');
 			var socket = io.connect('http://iotcar.local:5000/control');
 
 			// An event handler for a change of value 
 			$('input.sync').on('input', function (event) {
 				console.log("da thay doi")
 				socket.emit('Value changed', { who: $(this).attr('id'), data: $(this).val() });
+				socket_ip.emit('Value changed', { who: $(this).attr('id'), data: $(this).val() });
 				return false;
 			});
 
@@ -25,6 +27,15 @@
 			});
 
 			socket.on('Sever updated value', function (msg) {
+				console.log('Sever updated value ' + msg.who + " " + msg.data);
+				$('#' + msg.who).val(msg.data);
+			});
+
+			socket_ip.on('after connect', function (msg) {
+				console.log('After connect', msg);
+			});
+
+			socket_ip.on('Sever updated value', function (msg) {
 				console.log('Sever updated value ' + msg.who + " " + msg.data);
 				$('#' + msg.who).val(msg.data);
 			});
