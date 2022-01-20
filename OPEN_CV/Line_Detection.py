@@ -45,7 +45,7 @@ def detect_lane(frame):
 		#caculate angle
 		x_offset = end_mid_line[0] - start_mid_line[0]
 		y_offset = end_mid_line[1] - start_mid_line[1]
-		speed_set = 55
+		speed_set = 50
 		angle_to_mid_line = -(math.atan(x_offset/y_offset) * 180 / math.pi)
 	elif (len(lane_lines) == 1):
 		print('1 lane detected')
@@ -56,7 +56,7 @@ def detect_lane(frame):
 		#add line
 		cv2.imwrite('video_image.jpg', frame)
 
-		speed_set = 55
+		speed_set = 50
 		angle_to_mid_line = -(math.atan(x_offset/y_offset) * 180 / math.pi)
 	else:
 		print('no lane detected')

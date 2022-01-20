@@ -33,9 +33,9 @@ class VideoCamera(object):
         print('combine_value ', combine_value['angle'])
         auto_values['speed'] = combine_value['speed']
         if ((combine_value['angle'] - auto_values['angle'] >= 10) and auto_values['angle'] <= 100):
-            auto_values['angle'] = auto_values['angle'] + 10;
+            auto_values['angle'] = auto_values['angle'] + 20;
         elif ((combine_value['angle'] - auto_values['angle'] <= -10) and auto_values['angle'] >= -100):
-            auto_values['angle'] = auto_values['angle'] - 10;
+            auto_values['angle'] = auto_values['angle'] - 20;
 
         
         
