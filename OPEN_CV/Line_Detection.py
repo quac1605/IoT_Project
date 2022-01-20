@@ -29,30 +29,42 @@ def detect_lane(frame):
 	lane_lines = Combine_Line_Segments.average_slope_intercept(frame, line_segments)
 	#take lmid_ane_line
 	if (len(lane_lines) == 2):
+		print('1 lane detected')
+
 		first_lane_line = lane_lines[0]
 		second_lane_line = lane_lines[1]
 		line_image = np.zeros_like(frame)
 		start_mid_line = [int((first_lane_line[0]+second_lane_line[0])/2),int((first_lane_line[1]+second_lane_line[1])/2)] #lam sao de su dung float
 		end_mid_line =  [int((first_lane_line[2]+second_lane_line[2])/2),int((first_lane_line[3]+second_lane_line[3])/2)]
-		
+		#add line
 		cv2.line(line_image,(start_mid_line[0],start_mid_line[1]),(end_mid_line[0],end_mid_line[1]), (0,0,255),10)
 		line_image = cv2.addWeighted(frame, 0.8, line_image, 1, 1)
 		cv2.imwrite('video_image.jpg', line_image)
 		
 		#caculate angle
-		x_offset = start_mid_line[0] - end_mid_line[0]
+		x_offset = end_mid_line[0] - start_mid_line[0]
 		y_offset = end_mid_line[1] - start_mid_line[1]
-		print('first_lane_line')
-		print(first_lane_line)
-		print('second_lane_line')
-		print(second_lane_line)
-		if (y_offset):
-			angle_to_mid_line = math.atan(x_offset/y_offset) * 180 / math.pi
-		else:
-			angle_to_mid_line = 0
+		speed_set = 45
+		angle_to_mid_line = math.atan(x_offset/y_offset) * 180 / math.pi
+	elif (len(lane_lines) == 1):
+		print('1 lane detected')
+		first_lane_line = lane_lines[0]
+		line_image = np.zeros_like(frame)
+		x_offset = first_lane_line[2] - first_lane_line[0]
+		y_offset = first_lane_line[3] - first_lane_line[1]
+		#add line
+		cv2.line(line_image,first_lane_line, (0,0,255),10)
+		line_image = cv2.addWeighted(frame, 0.8, line_image, 1, 1)
+		cv2.imwrite('video_image.jpg', line_image)
+
+		speed_set = 45
+		angle_to_mid_line = math.atan(x_offset/y_offset) * 180 / math.pi
 	else:
+		print('no lane detected')
+		cv2.imwrite('video_image.jpg', frame)
+		speed_set = 0
 		angle_to_mid_line = 0
-	return angle_to_mid_line
+	return {'speed':speed_set, 'angle':angle_to_mid_line}
 
 '''
 lane_lines = detect_lane(frame)

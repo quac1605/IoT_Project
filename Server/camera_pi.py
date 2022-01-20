@@ -8,11 +8,9 @@ sys.path.insert(0, "../OPEN_CV")
 from Line_Detection import detect_lane
 
 auto_values = {
-    'speed': 43,
+    'speed': 0,
     'angle': 0,
 }
-i = 0
-test = 0
 class VideoCamera(object):
     global auto_values
     def __init__(self, resolution=(480,320), framerate=120,flip = False):
@@ -29,19 +27,15 @@ class VideoCamera(object):
         return frame
 
     def get_frame(self):
-        global i
-        global test
         frame = self.flip_if_needed(self.vs.read())
         ret, jpeg = cv2.imencode('.jpg', frame)
-        #auto_values['angle'] = -(detect_lane(frame) * 3)
-        
-        if (i == 5):
-            auto_values['angle'] = (test/5)
-            print(auto_values['angle'])
-            i= 0
-            test = 0
-        else:
-            test = test + (detect_lane(frame) * 1)
-            i = i + 1
+        combine_value = detect_lane(frame)
+        auto_values['speed'] = combine_value['speed']
+        if (combine_value['angle'] - auto_values['angle'] >= 10):
+            auto_values['angle'] = auto_values['angle'] + 10;
+        elif (combine_value['angle'] - auto_values['angle'] <= 10):
+            auto_values['angle'] = auto_values['angle'] - 10;
+
+        print(auto_values['angle'])
         
         return jpeg.tobytes()
