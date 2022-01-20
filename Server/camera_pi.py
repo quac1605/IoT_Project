@@ -31,10 +31,10 @@ class VideoCamera(object):
         ret, jpeg = cv2.imencode('.jpg', frame)
         combine_value = detect_lane(frame)
         auto_values['speed'] = combine_value['speed']
-        if (combine_value['angle'] - auto_values['angle'] >= 10):
-            auto_values['angle'] = auto_values['angle'] - 10;
-        elif (combine_value['angle'] - auto_values['angle'] <= -10):
+        if ((combine_value['angle'] - auto_values['angle'] >= 10) & auto_values['angle'] <= 100):
             auto_values['angle'] = auto_values['angle'] + 10;
+        elif ((combine_value['angle'] - auto_values['angle'] <= -10) & auto_values['angle'] >= -100):
+            auto_values['angle'] = auto_values['angle'] - 10;
 
         
         
