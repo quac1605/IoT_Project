@@ -30,6 +30,7 @@ class VideoCamera(object):
         return frame
 
     def get_frame(self):
+        global old_value
         frame = self.flip_if_needed(self.vs.read())
         ret, jpeg = cv2.imencode('.jpg', frame)
         combine_value = detect_lane(frame)
