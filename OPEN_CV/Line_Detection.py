@@ -27,7 +27,7 @@ def detect_lane(frame):
 	cropped_edges = Cutting_Image.cutting_image(edges)
 	line_segments = Detect_Line_Segment.detect_line_segments(cropped_edges)
 	lane_lines = Combine_Line_Segments.average_slope_intercept(frame, line_segments)
-	cv2.imwrite('video_image_edges.jpg', edges)
+	cv2.imwrite('video_image_edges.jpg', cropped_edges)
 	#take lmid_ane_line
 	if (len(lane_lines) == 2):
 		print('1 lane detected')
@@ -46,7 +46,7 @@ def detect_lane(frame):
 		x_offset = end_mid_line[0] - start_mid_line[0]
 		y_offset = end_mid_line[1] - start_mid_line[1]
 		speed_set = 45
-		angle_to_mid_line = math.atan(x_offset/y_offset) * 180 / math.pi
+		angle_to_mid_line = -(math.atan(x_offset/y_offset) * 180 / math.pi)
 	elif (len(lane_lines) == 1):
 		print('1 lane detected')
 		first_lane_line = lane_lines[0]
@@ -57,7 +57,7 @@ def detect_lane(frame):
 		cv2.imwrite('video_image.jpg', frame)
 
 		speed_set = 45
-		angle_to_mid_line = math.atan(x_offset/y_offset) * 180 / math.pi
+		angle_to_mid_line = -(math.atan(x_offset/y_offset) * 180 / math.pi)
 	else:
 		print('no lane detected')
 		cv2.imwrite('video_image.jpg', frame)
