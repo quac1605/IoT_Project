@@ -15,6 +15,7 @@ auto_values = {
 old_value = 0
 class VideoCamera(object):
     global auto_values
+    global old_value
     def __init__(self, resolution=(480,320), framerate=120,flip = False):
         self.vs = PiVideoStream().start()
         self.flip = flip
