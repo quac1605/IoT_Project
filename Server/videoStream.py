@@ -7,17 +7,15 @@ import sys
 videoStreamBp = Blueprint('video_feed', __name__)
 
 #avoid crash
-frame = cv2.imread('saved-test-image.jpg')
+frame = cv2.imread('video_image.jpg')
 
 from camera_pi import VideoCamera
 pi_camera = VideoCamera(flip=False)
 # Raspberry Pi camera module (requires picamera package)
-values = None
 
 def gen_frames(camera):  
     # get camera frame and public to global
     global frame
-    global video_mode
     while True:
         frame = camera.get_frame()
     # Su dung OpenCV cua Khanh o day de return ra angle
