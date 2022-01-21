@@ -38,7 +38,7 @@ def detect_lane(frame):
 		print(first_lane_line)
 		print('second lane detected')
 		print(second_lane_line)
-		
+
 		line_image = np.zeros_like(frame)
 		if(first_lane_line[0] < 0 or second_lane_line[0] < 0 or first_lane_line[2] < 0 or second_lane_line[2] < 0):
 			print('2 line detected (with 1 fake line)')
@@ -71,6 +71,8 @@ def detect_lane(frame):
 	elif (len(lane_lines) == 1):
 		print('1 lane detected')
 		first_lane_line = lane_lines[0]
+		print('only lane detected ')
+		print(first_lane_line)
 		line_image = np.zeros_like(frame)
 		x_offset = first_lane_line[2] - first_lane_line[0]
 		y_offset = first_lane_line[3] - first_lane_line[1]
