@@ -31,7 +31,7 @@ def detect_lane(frame):
 	cv2.imwrite('video_image.jpg', frame)
 	#take lmid_ane_line
 	if (len(lane_lines) == 2):
-		speed_set = 55
+		speed_set = 48
 		first_lane_line = lane_lines[0]
 		second_lane_line = lane_lines[1]
 
@@ -67,7 +67,7 @@ def detect_lane(frame):
 			y_offset = end_mid_line[1] - start_mid_line[1]
 			angle_to_mid_line = -(math.atan(x_offset/y_offset) * 180 / math.pi)
 	elif (len(lane_lines) == 1):
-		speed_set = 55
+		speed_set = 45
 		print('1 lane detected')
 		first_lane_line = lane_lines[0]
 		print('only lane detected ')
