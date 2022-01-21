@@ -31,6 +31,7 @@ def detect_lane(frame):
 	cv2.imwrite('video_image.jpg', frame)
 	#take lmid_ane_line
 	if (len(lane_lines) == 2):
+		speed_set = 55
 		first_lane_line = lane_lines[0]
 		second_lane_line = lane_lines[1]
 
@@ -47,12 +48,10 @@ def detect_lane(frame):
 		if ((first_lane_line[2] - first_lane_line[0] < -750) or (first_lane_line[2] - first_lane_line[0] > 750)):
 			x_offset = second_lane_line[2] - second_lane_line[0]
 			y_offset = second_lane_line[3] - second_lane_line[1]
-			speed_set = 48
 			angle_to_mid_line = -(math.atan(x_offset/y_offset) * 180 / math.pi)
 		elif ((second_lane_line[2] - second_lane_line[0] < -750) or (second_lane_line[2] - second_lane_line[0] > 750)):
 			x_offset = first_lane_line[2] - first_lane_line[0]
 			y_offset = first_lane_line[3] - first_lane_line[1]
-			speed_set = 48
 			angle_to_mid_line = -(math.atan(x_offset/y_offset) * 180 / math.pi)
 		else:			
 			start_mid_line = [int((first_lane_line[0]+second_lane_line[0])/2),int((first_lane_line[1]+second_lane_line[1])/2)] #lam sao de su dung float
@@ -66,9 +65,9 @@ def detect_lane(frame):
 			#caculate angle
 			x_offset = end_mid_line[0] - start_mid_line[0]
 			y_offset = end_mid_line[1] - start_mid_line[1]
-			speed_set = 55
 			angle_to_mid_line = -(math.atan(x_offset/y_offset) * 180 / math.pi)
 	elif (len(lane_lines) == 1):
+		speed_set = 55
 		print('1 lane detected')
 		first_lane_line = lane_lines[0]
 		print('only lane detected ')
@@ -76,7 +75,6 @@ def detect_lane(frame):
 		line_image = np.zeros_like(frame)
 		x_offset = first_lane_line[2] - first_lane_line[0]
 		y_offset = first_lane_line[3] - first_lane_line[1]
-		speed_set = 50
 		angle_to_mid_line = -(math.atan(x_offset/y_offset) * 180 / math.pi)
 		#fking crashing avoid
 		if (x_offset <  -750 or x_offset > 750):
