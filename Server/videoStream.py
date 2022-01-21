@@ -20,7 +20,7 @@ def gen_frames(camera):
         frame = camera.get_frame()
     # Su dung OpenCV cua Khanh o day de return ra angle
         yield (b'--frame\r\n'
-                b'Content-Type: image/jpeg\r\n\r\n' + open('video_image.jpg', 'rb').read() + b'\r\n\r\n')
+                b'Content-Type: image/jpeg\r\n\r\n' + open('video_image_edges.jpg', 'rb').read() + b'\r\n\r\n')
     '''
         if (video_mode == 'manuell'):
             yield (b'--frame\r\n'
