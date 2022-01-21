@@ -79,7 +79,7 @@ def detect_lane(frame):
 		speed_set = 48
 		angle_to_mid_line = -(math.atan(x_offset/y_offset) * 180 / math.pi)
 		#fking crashing avoid
-		if (x_offset <  -660 or x_offset > 660):
+		if (x_offset <  -750 or x_offset > 750):
 			angle_to_mid_line = -angle_to_mid_line
 
 	else:
