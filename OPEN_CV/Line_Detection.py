@@ -34,6 +34,10 @@ def detect_lane(frame):
 
 		first_lane_line = lane_lines[0]
 		second_lane_line = lane_lines[1]
+		print('first lane detected ')
+		print(first_lane_line)
+		print('second lane detected')
+		print(second_lane_line)
 		line_image = np.zeros_like(frame)
 		start_mid_line = [int((first_lane_line[0]+second_lane_line[0])/2),int((first_lane_line[1]+second_lane_line[1])/2)] #lam sao de su dung float
 		end_mid_line =  [int((first_lane_line[2]+second_lane_line[2])/2),int((first_lane_line[3]+second_lane_line[3])/2)]
