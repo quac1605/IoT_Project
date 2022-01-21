@@ -33,12 +33,12 @@ def detect_lane(frame):
 	if (len(lane_lines) == 2):
 		first_lane_line = lane_lines[0]
 		second_lane_line = lane_lines[1]
-		'''
+
 		print('first lane detected ')
 		print(first_lane_line)
 		print('second lane detected')
 		print(second_lane_line)
-		'''
+		
 		line_image = np.zeros_like(frame)
 		if(first_lane_line[0] < 0 or second_lane_line[0] < 0 or first_lane_line[2] < 0 or second_lane_line[2] < 0):
 			print('2 line detected (with 1 fake line)')
