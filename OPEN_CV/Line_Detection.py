@@ -30,7 +30,7 @@ def detect_lane(frame):
 	cv2.imwrite('video_image_edges.jpg', cropped_edges)
 	#take lmid_ane_line
 	if (len(lane_lines) == 2):
-		print('1 lane detected')
+		print('2 lane detected')
 
 		first_lane_line = lane_lines[0]
 		second_lane_line = lane_lines[1]
