@@ -76,7 +76,7 @@ def detect_lane(frame):
 		line_image = np.zeros_like(frame)
 		x_offset = first_lane_line[2] - first_lane_line[0]
 		y_offset = first_lane_line[3] - first_lane_line[1]
-		speed_set = 40
+		speed_set = 44
 		angle_to_mid_line = -(math.atan(x_offset/y_offset) * 180 / math.pi)
 		#fking crashing avoid
 		if (x_offset <  -750 or x_offset > 750):
