@@ -11,7 +11,7 @@ def detection_edges(frame):
 
 
 	#define white range
-	lower_white = np.array([0, 0, 160])
+	lower_white = np.array([0, 0, 140])
 	upper_white = np.array([179, 50, 255])
 
 	#mask erstellen
