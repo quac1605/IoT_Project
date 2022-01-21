@@ -40,16 +40,16 @@ def detect_lane(frame):
 		print(second_lane_line)
 
 		line_image = np.zeros_like(frame)
-		if((first_lane_line[2] - first_lane_line[0] < -600) or (first_lane_line[2] - first_lane_line[0] > 600) or (second_lane_line[2] - second_lane_line[0] < -600) or (second_lane_line[2] - second_lane_line[0] > 600)):
+		if((first_lane_line[2] - first_lane_line[0] < -660) or (first_lane_line[2] - first_lane_line[0] > 660) or (second_lane_line[2] - second_lane_line[0] < -660) or (second_lane_line[2] - second_lane_line[0] > 660)):
 			print('2 line detected (with 1 fake line)')
 		else:
 			print('2 line detected')
-		if ((first_lane_line[2] - first_lane_line[0] < -600) or (first_lane_line[2] - first_lane_line[0] > 600)):
+		if ((first_lane_line[2] - first_lane_line[0] < -660) or (first_lane_line[2] - first_lane_line[0] > 660)):
 			x_offset = second_lane_line[2] - second_lane_line[0]
 			y_offset = second_lane_line[3] - second_lane_line[1]
 			speed_set = 48
 			angle_to_mid_line = -(math.atan(x_offset/y_offset) * 180 / math.pi)
-		elif ((second_lane_line[2] - second_lane_line[0] < -600) or (second_lane_line[2] - second_lane_line[0] > 600)):
+		elif ((second_lane_line[2] - second_lane_line[0] < -660) or (second_lane_line[2] - second_lane_line[0] > 660)):
 			x_offset = first_lane_line[2] - first_lane_line[0]
 			y_offset = first_lane_line[3] - first_lane_line[1]
 			speed_set = 48
@@ -79,7 +79,7 @@ def detect_lane(frame):
 		speed_set = 48
 		angle_to_mid_line = -(math.atan(x_offset/y_offset) * 180 / math.pi)
 		#fking crashing avoid
-		if (x_offset <  -600 or x_offset > 600):
+		if (x_offset <  -660 or x_offset > 660):
 			angle_to_mid_line = -angle_to_mid_line
 
 	else:
