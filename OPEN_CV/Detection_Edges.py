@@ -14,7 +14,7 @@ def detection_edges(frame):
 	'''
 	#blue range dark
 	lower_white = np.array([50, 75, 0])
-	upper_white = np.array([165, 255, 255])
+	upper_white = np.array([165, 160, 160])
 	#mask erstellen
 	mask = cv2.inRange(hsv,lower_white,upper_white)
 	'''
