@@ -7,10 +7,14 @@ def detection_edges(frame):
 	#import piture
 
 	hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
-
-	#blue range
+	'''
+	#blue range 1
 	lower_white = np.array([105, 140, 12])
 	upper_white = np.array([164, 255, 107])
+	'''
+	#blue range dark
+	lower_white = np.array([50, 75, 0])
+	upper_white = np.array([165, 255, 255])
 	#mask erstellen
 	mask = cv2.inRange(hsv,lower_white,upper_white)
 	'''
