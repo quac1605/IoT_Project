@@ -31,7 +31,7 @@ def detect_lane(frame):
 	cv2.imwrite('video_image.jpg', frame)
 	#take lmid_ane_line
 	if (len(lane_lines) == 2):
-		speed_set = 48
+		speed_set = 45
 		first_lane_line = lane_lines[0]
 		second_lane_line = lane_lines[1]
 
