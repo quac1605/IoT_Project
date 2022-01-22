@@ -43,8 +43,10 @@ def detect_lane(frame):
 		line_image = np.zeros_like(frame)
 		if((first_lane_line[2] - first_lane_line[0] < -750) or (first_lane_line[2] - first_lane_line[0] > 750) or (second_lane_line[2] - second_lane_line[0] < -750) or (second_lane_line[2] - second_lane_line[0] > 750)):
 			print('2 line detected (with 1 fake line)')
+			lane_number = 1;
 		else:
 			print('2 line detected')
+			lane_number = 2;
 		if ((first_lane_line[2] - first_lane_line[0] < -750) or (first_lane_line[2] - first_lane_line[0] > 750)):
 			x_offset = second_lane_line[2] - second_lane_line[0]
 			y_offset = second_lane_line[3] - second_lane_line[1]
@@ -69,6 +71,7 @@ def detect_lane(frame):
 	elif (len(lane_lines) == 1):
 		speed_set = 45
 		print('1 lane detected')
+		lane_number = 1;
 		first_lane_line = lane_lines[0]
 		print('only lane detected ')
 		print(first_lane_line)
@@ -82,10 +85,11 @@ def detect_lane(frame):
 
 	else:
 		print('no lane detected')
+		lane_number = 0;
 		cv2.imwrite('video_image.jpg', frame)
 		speed_set = 0
 		angle_to_mid_line = 0
-	return {'speed':speed_set, 'angle':angle_to_mid_line}
+	return {'speed':speed_set, 'angle':angle_to_mid_line, 'lane_number':lane_number}
 
 '''
 lane_lines = detect_lane(frame)
