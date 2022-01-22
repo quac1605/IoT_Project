@@ -32,7 +32,7 @@ def average_slope_intercept(frame, line_segments):
 				if x1 < left_region_boundary and x2 < left_region_boundary:
 					left_fit.append((slope, intercept))
 
-			else: 
+			elif slope > 0: 
 				if x1 > right_region_boundary and x2 > right_region_boundary:
 					right_fit.append((slope,intercept))
 
