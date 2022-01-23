@@ -7,10 +7,10 @@ def cutting_image(edges):
 	mask = np.zeros_like(edges) #Return an array of zeros with the same shape and type as a given array
 
 	polygon = np.array([[
-		(0,height * 0.60),
-		(width,height * 0.60),
-		(width,height * 0.85),
-		(0,height * 0.85),
+		(0,height * 0.55),
+		(width,height * 0.55),
+		(width,height * 0.90),
+		(0,height * 0.90),
 		]],np.int32)
 
 	cv2.fillPoly(mask, pts = [polygon], color=(255,255,255))
