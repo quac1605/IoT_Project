@@ -9,8 +9,8 @@ def cutting_image(edges):
 	polygon = np.array([[
 		(0,height * 0.55),
 		(width,height * 0.55),
-		(width,height * 0.85),
-		(0,height * 0.85),
+		(width,height * 0.80),
+		(0,height * 0.80),
 		]],np.int32)
 
 	cv2.fillPoly(mask, pts = [polygon], color=(255,255,255))
