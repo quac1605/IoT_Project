@@ -43,9 +43,9 @@ class VideoCamera(object):
             auto_values['angle'] = auto_values['angle'] - 20;
         '''
         if(combine_value['lane_number'] == 2):
-            if ((combine_value['angle'] - (auto_values['angle']/2) >= 5) and auto_values['angle'] <= 100):
+            if ((combine_value['angle'] - (auto_values['angle']/3) >= 5) and auto_values['angle'] <= 100):
                 auto_values['angle'] = auto_values['angle'] + 5
-            elif ((combine_value['angle'] - (auto_values['angle']/2) <= -5) and auto_values['angle'] >= -100):
+            elif ((combine_value['angle'] - (auto_values['angle']/3) <= -5) and auto_values['angle'] >= -100):
                 auto_values['angle'] = auto_values['angle'] - 5
         elif(combine_value['lane_number'] == 1):
             if ((combine_value['angle'] >= 45) and auto_values['angle'] <= 100):
