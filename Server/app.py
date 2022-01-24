@@ -48,7 +48,7 @@ def value_changed(message):
     global control_values
     control_values[message['who']] = message['data']
     emit('Sever updated value', message, broadcast=True, namespace='/control')
-    print(message['data'])
+    print(message)
 
 """Create Another Thread to Control the Car"""
 def thread1(threadname, val):
@@ -61,7 +61,7 @@ def thread1(threadname, val):
         if (control_values['mode'] == 'auto'):
             ctrl.speed(int(auto_values['speed']))
             ctrl.grad(int(auto_values['angle']))
-            socketio.emit('Sever updated value', { 'who': 'speed', 'data': auto_values['speed'] }, broadcast=True, namespace='/control')
+            #socketio.emit('Sever updated value', { 'who': 'speed', 'data': auto_values['speed'] }, broadcast=True, namespace='/control')
             #ocketio.emit('Sever updated value', { 'who': 'angle', 'data': auto_values['angle'] }, broadcast=True, namespace='/control')
             #print('auto set angle = ',auto_values['angle'], 'auto set speed = ', auto_values['speed'])
         #code for manuell
