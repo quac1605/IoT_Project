@@ -1,4 +1,4 @@
-from flask import Flask, render_template, Response, request
+from flask import Flask, render_template, Response, make_response
 from flask_socketio import SocketIO, emit
 from time import sleep
 from threading import Thread, Lock
