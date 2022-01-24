@@ -1,10 +1,13 @@
 from flask import Blueprint, Flask, render_template, Response
+from flask_cors import CORS, cross_origin
 
 import cv2
 #import line_CV
 import sys
 
 videoStreamBp = Blueprint('video_feed', __name__)
+cors = CORS(videoStreamBp)
+videoStreamBp.config['CORS_HEADERS'] = 'Content-Type'
 
 #avoid crash
 frame = cv2.imread('video_image.jpg')
@@ -24,5 +27,6 @@ def gen_frames(camera):
   
                
 @videoStreamBp.route('/video_feed')
+@cross_origin()
 def video_feed():
     return Response(gen_frames(pi_camera), mimetype='multipart/x-mixed-replace; boundary=frame')
