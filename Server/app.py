@@ -1,6 +1,5 @@
 from flask import Flask, render_template, Response, make_response
 from flask_socketio import SocketIO, emit
-from flask_cors import CORS
 from time import sleep
 from threading import Thread, Lock
 import sys
@@ -36,7 +35,9 @@ CORS(app)
 #Create  GUI for namespace "/"
 @app.route('/')
 def index():
-    return render_template('index.html',**control_values)
+    response = make_response(render_template('index.html',**control_values),foo = 42)
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    return response
   
 #Try to catch connect signal from namespace "/control"
 @socketio.on('connect', namespace='/control')
