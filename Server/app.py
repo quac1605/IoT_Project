@@ -1,4 +1,5 @@
 from flask import Flask, render_template, Response, request, make_response
+from flask_cors import CORS, cross_origin
 from flask_socketio import SocketIO, emit
 from time import sleep
 from threading import Thread, Lock
@@ -8,6 +9,13 @@ sys.path.insert(0, "..//Modul//Motor_Control")
 import Control as ctrl
 
 app = Flask(__name__)
+cors = CORS(app)
+cors = CORS(app, resource={
+    r"/*":{
+        "origins":"*"
+    }
+})
+app.config['CORS_HEADERS'] = 'Content-Type'
 #for socket
 socketio = SocketIO(app, async_mode='threading')
 #thread = None
