@@ -17,6 +17,8 @@ def detect_lane(frame):
 	cropped_edges,height = Cutting_Image.cutting_image(edges)
 	line_segments = Detect_Line_Segment.detect_line_segments(cropped_edges)
 	lane_lines = Combine_Line_Segments.average_slope_intercept(frame, line_segments)
+	cv2.imwrite('image_edges.jpg', edges)
+	cv2.imwrite('cropped_edges.jpg', edges)
 	cv2.imwrite('video_image_edges.jpg', cropped_edges)
 	cv2.imwrite('video_image.jpg', frame)
 	#take lmid_ane_line
