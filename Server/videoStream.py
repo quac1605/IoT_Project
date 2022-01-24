@@ -10,14 +10,15 @@ CORS(videoStreamBp)
 
 #avoid crash
 
-'''
+
 from camera_pi import VideoCamera
 pi_camera = VideoCamera(flip=False)
+frame = pi_camera.get_frame();
 # Raspberry Pi camera module (requires picamera package)
-'''
+
 def gen_frames_edges():  
     # get camera frame and public to global
-
+    global frame
     while True:
         #frame = camera.get_frame()
     # Su dung OpenCV cua Khanh o day de return ra angle
@@ -26,6 +27,7 @@ def gen_frames_edges():
 
 def gen_frames():  
     # get camera frame and public to global
+    global frame
     while True:
     # Su dung OpenCV cua Khanh o day de return ra angle
         yield (b'--frame\r\n'

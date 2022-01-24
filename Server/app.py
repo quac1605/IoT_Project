@@ -24,8 +24,7 @@ control_values = {
     'angle': 0,
     'mode':'manuell'
 }
-from camera_pi import auto_values,VideoCamera
-pi_camera = VideoCamera(flip=False)
+from camera_pi import auto_value
 
 
 
