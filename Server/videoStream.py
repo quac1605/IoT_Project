@@ -26,6 +26,7 @@ def gen_frames(camera):
 
 def gen_frames_edges():  
     # get camera frame and public to global
+    global frame
     while True:
     # Su dung OpenCV cua Khanh o day de return ra angle
         yield (b'--frame\r\n'
