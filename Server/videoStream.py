@@ -21,16 +21,8 @@ def gen_frames(camera):
     # Su dung OpenCV cua Khanh o day de return ra angle
         yield (b'--frame\r\n'
                 b'Content-Type: image/jpeg\r\n\r\n' + open('video_image.jpg', 'rb').read() + b'\r\n\r\n')
-    '''
-        if (video_mode == 'manuell'):
-            yield (b'--frame\r\n'
-                b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
-        else:
-    '''
-
-    
+  
                
-
 @videoStreamBp.route('/video_feed')
 def video_feed():
     return Response(gen_frames(pi_camera), mimetype='multipart/x-mixed-replace; boundary=frame')
