@@ -1,5 +1,6 @@
 from flask import Blueprint, Flask, render_template, Response
 from flask_cors import CORS, cross_origin
+from time import sleep
 
 import cv2
 #import line_CV
@@ -10,7 +11,7 @@ CORS(videoStreamBp)
 
 from camera_pi import VideoCamera
 pi_camera = VideoCamera(flip=False)
-frame = cv2.imread('video_image.jpg');
+frame = pi_camera.get_frame()
 #avoid crash
 
 
@@ -18,6 +19,7 @@ frame = cv2.imread('video_image.jpg');
 
 def gen_frames_edges():  
     # get camera frame and public to global
+    sleep(0.1)
     global frame
     while True:
     # Su dung OpenCV cua Khanh o day de return ra angle
@@ -27,6 +29,7 @@ def gen_frames_edges():
 
 def gen_frames():  
     # get camera frame and public to global
+    sleep(0.1)
     global frame
     while True:
     # Su dung OpenCV cua Khanh o day de return ra angle
