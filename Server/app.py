@@ -53,13 +53,12 @@ def value_changed(message):
     print(message)
 
 def OnchangedValue(lastValue,nowvalue,Socketio):
-    if(lastValue != nowvalue):
+    if(lastValue['angle'] != nowvalue['angle'] or lastValue['speed'] != nowvalue['speed']):
             Socketio.emit('Sever updated value', { 'who': 'speed', 'data': nowvalue['speed'] }, broadcast=True, namespace='/control')
             Socketio.emit('Sever updated value', { 'who': 'angle', 'data': nowvalue['angle'] }, broadcast=True, namespace='/control')
     
 """Create Another Thread to Control the Car"""
 def thread1(threadname, val):
-    #read variable "a" modify by thread 2
     global control_values
     global auto_values
     global socketio
