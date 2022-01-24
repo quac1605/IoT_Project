@@ -5,9 +5,6 @@ import cv2
 import sys
 
 edgesStreamBp = Blueprint('video_edges_feed', __name__)
-
-from camera_pi import VideoCamera
-pi_camera = VideoCamera(flip=False)
 # Raspberry Pi camera module (requires picamera package)
 
 def gen_frames_edges():  
