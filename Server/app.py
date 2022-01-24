@@ -9,7 +9,9 @@ sys.path.insert(0, "..//Modul//Motor_Control")
 import Control as ctrl
 
 app = Flask(__name__)
+app.config['CORS_HEADERS'] = 'Content-Type'
 
+cors = CORS(app, resources={r"/foo": {"origins": "http://192.168.8.21:5000"}})
 #for socket
 socketio = SocketIO(app, async_mode='threading')
 #thread = None
@@ -36,9 +38,9 @@ from edgesStream import edgesStreamBp
 app.register_blueprint(edgesStreamBp)
 '''
 #Create  GUI for namespace "/"
-CORS(app)
 
 @app.route('/')
+@cross_origin(origin='http://192.168.8.21:5000',headers=['Content- Type','Authorization'])
 def index():
     return render_template('index.html',**control_values)
   
@@ -61,14 +63,14 @@ def thread1(threadname, val):
     #read variable "a" modify by thread 2
     global control_values
     global auto_values
-    #global socketio
+    global socketio
     while True:
         #auto mode
         if (control_values['mode'] == 'auto'):
             ctrl.speed(int(auto_values['speed']))
             ctrl.grad(int(auto_values['angle']))
-            #socketio.emit('Sever updated value', { 'who': 'speed', 'data': auto_values['speed'] }, broadcast=True, namespace='/control')
-            #socketio.emit('Sever updated value', { 'who': 'angle', 'data': auto_values['angle'] }, broadcast=True, namespace='/control')
+            socketio.emit('Sever updated value', { 'who': 'speed', 'data': auto_values['speed'] }, broadcast=True, namespace='/control')
+            socketio.emit('Sever updated value', { 'who': 'angle', 'data': auto_values['angle'] }, broadcast=True, namespace='/control')
             #print('auto set angle = ',auto_values['angle'], 'auto set speed = ', auto_values['speed'])
         #code for manuell
         elif (control_values['mode'] == 'manuell'):
