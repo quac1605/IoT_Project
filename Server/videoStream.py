@@ -1,10 +1,12 @@
 from flask import Blueprint, Flask, render_template, Response
+from flask.ext.cors import CORS, cross_origin
 
 import cv2
 #import line_CV
 import sys
 
 videoStreamBp = Blueprint('video_feed', __name__)
+CORS(videoStreamBp)
 
 #avoid crash
 frame = cv2.imread('video_image.jpg')

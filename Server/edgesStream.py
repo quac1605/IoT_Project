@@ -1,10 +1,12 @@
 from flask import Blueprint, Flask, render_template, Response
+from flask.ext.cors import CORS, cross_origin
 
 import cv2
 #import line_CV
 import sys
 
 edgesStreamBp = Blueprint('video_edges_feed', __name__)
+CORS(edgesStreamBp)
 # Raspberry Pi camera module (requires picamera package)
 
 def gen_frames_edges():  
