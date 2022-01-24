@@ -28,8 +28,8 @@ from camera_pi import auto_values
 from videoStream import videoStreamBp
 app.register_blueprint(videoStreamBp)
 
-#from edgesStream import edgesStreamBp
-#app.register_blueprint(edgesStreamBp)
+from edgesStream import edgesStreamBp
+app.register_blueprint(edgesStreamBp)
 
 #Create  GUI for namespace "/"
 @app.route('/')
