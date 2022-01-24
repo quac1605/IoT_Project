@@ -25,10 +25,7 @@ control_values = {
     'angle': 0,
     'mode':'manuell'
 }
-from camera_pi import auto_values,VideoCamera
-pi_camera = VideoCamera(flip=False)
-frame = cv2.imread('video_image_edges.jpg')
-
+from camera_pi import auto_values
 
 #Add Streaming Video to this Web throw Blueprint
 from videoStream import videoStreamBp
@@ -76,17 +73,10 @@ def thread1(threadname, val):
             #print('manuell set angle = ',control_values['angle'], 'manuell set speed = ', control_values['speed'])           
         sleep(0.1)
 
-def camera_thread(threadname):
-    global frame
-    while True:
-        frame = pi_camera.get_frame();
 
 thread1 = Thread( target=thread1, args=("Thread-1", control_values) )
-camera_thread = Thread( target=camera_thread, args=("Camera_thread"))
 
 if __name__ == '__main__':
     thread1.start()
-    camera_thread.start()
     socketio.run(app,host='0.0.0.0', port=5000, debug=False)
-    camera_thread.join()
     thread1.join()

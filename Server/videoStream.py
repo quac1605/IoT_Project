@@ -8,6 +8,9 @@ import sys
 videoStreamBp = Blueprint('video_feed', __name__)
 CORS(videoStreamBp)
 
+from camera_pi import VideoCamera
+pi_camera = VideoCamera(flip=False)
+frame = pi_camera.get_frame()
 #avoid crash
 
 
@@ -16,15 +19,16 @@ CORS(videoStreamBp)
 def gen_frames_edges():  
     # get camera frame and public to global
     while True:
-        #frame = camera.get_frame()
     # Su dung OpenCV cua Khanh o day de return ra angle
         yield (b'--frame\r\n'
                 b'Content-Type: image/jpeg\r\n\r\n' + open('video_image_edges.jpg', 'rb').read() + b'\r\n\r\n')
 
 def gen_frames():  
     # get camera frame and public to global
+    global frame
     while True:
     # Su dung OpenCV cua Khanh o day de return ra angle
+        frame = pi_camera.get_frame()
         yield (b'--frame\r\n'
                 b'Content-Type: image/jpeg\r\n\r\n' + open('video_image.jpg', 'rb').read() + b'\r\n\r\n')
                
