@@ -78,7 +78,6 @@ def thread1(threadname, val):
 thread1 = Thread( target=thread1, args=("Thread-1", control_values) )
 
 if __name__ == '__main__':
-    pi_camera.get_frame();
     thread1.start()
     socketio.run(app,host='0.0.0.0', port=5000, debug=False)
     thread1.join()
