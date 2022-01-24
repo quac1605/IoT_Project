@@ -9,7 +9,9 @@ sys.path.insert(0, "..//Modul//Motor_Control")
 import Control as ctrl
 
 app = Flask(__name__)
+app.config['CORS_HEADERS'] = 'Content-Type'
 
+cors = CORS(app, resources={r"/": {"origins": "http://localhost:port"}})
 #for socket
 socketio = SocketIO(app, async_mode='threading')
 #thread = None
@@ -33,10 +35,10 @@ app.register_blueprint(videoStreamBp)
 from edgesStream import edgesStreamBp
 app.register_blueprint(edgesStreamBp)
 
-CORS(app, support_credentials=True)
+
 #Create  GUI for namespace "/"
 @app.route('/')
-@cross_origin(supports_credentials=True)
+@cross_origin(origin='localhost',headers=['Content- Type','Authorization'])
 def index():
     return render_template('index.html',**control_values)
   
