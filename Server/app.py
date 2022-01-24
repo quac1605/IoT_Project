@@ -3,6 +3,7 @@ from flask_cors import CORS, cross_origin
 from flask_socketio import SocketIO, emit
 from time import sleep
 from threading import Thread, Lock
+import cv2
 import sys
 
 sys.path.insert(0, "..//Modul//Motor_Control")
@@ -24,8 +25,9 @@ control_values = {
     'angle': 0,
     'mode':'manuell'
 }
-from camera_pi import auto_values
-
+from camera_pi import auto_values,VideoCamera
+pi_camera = VideoCamera(flip=False)
+frame = cv2.imread('video_image_edges.jpg')
 
 
 #Add Streaming Video to this Web throw Blueprint
@@ -71,13 +73,20 @@ def thread1(threadname, val):
         elif (control_values['mode'] == 'manuell'):
             ctrl.speed(int(control_values['speed']))
             ctrl.grad(int(control_values['angle']))
-            #print('manuell set angle = ',control_values['angle'], 'manuell set speed = ', control_values['speed'])
-            
+            #print('manuell set angle = ',control_values['angle'], 'manuell set speed = ', control_values['speed'])           
         sleep(0.1)
 
+def camera_thread(threadname):
+    global frame
+    while True:
+        frame = pi_camera.get_frame();
+
 thread1 = Thread( target=thread1, args=("Thread-1", control_values) )
+camera_thread = Thread( target=camera_thread, args=("Camera_thread"))
 
 if __name__ == '__main__':
     thread1.start()
+    camera_thread.start()
     socketio.run(app,host='0.0.0.0', port=5000, debug=False)
+    camera_thread.join()
     thread1.join()
