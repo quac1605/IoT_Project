@@ -15,7 +15,7 @@ from camera_pi import VideoCamera
 pi_camera = VideoCamera(flip=False)
 # Raspberry Pi camera module (requires picamera package)
 
-def gen_frames(camera):  
+def gen_frames_edges(camera):  
     # get camera frame and public to global
     global frame
     while True:
@@ -24,17 +24,18 @@ def gen_frames(camera):
         yield (b'--frame\r\n'
                 b'Content-Type: image/jpeg\r\n\r\n' + open('video_image_edges.jpg', 'rb').read() + b'\r\n\r\n')
 
-def gen_frames_edges():  
+def gen_frames():  
     # get camera frame and public to global
+    global frame
     while True:
     # Su dung OpenCV cua Khanh o day de return ra angle
         yield (b'--frame\r\n'
-                b'Content-Type: image/jpeg\r\n\r\n' + open('video_image.jpg', 'rb').read() + b'\r\n\r\n')
+                b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
                
 @videoStreamBp.route('/video_feed')
 def video_feed():
-    return Response(gen_frames(pi_camera), mimetype='multipart/x-mixed-replace; boundary=frame')
+    return Response(gen_frames_edges(pi_camera), mimetype='multipart/x-mixed-replace; boundary=frame')
 
 @videoStreamBp.route('/video_edges_feed')
 def video_edges_feed():
-    return Response(gen_frames_edges(), mimetype='multipart/x-mixed-replace; boundary=frame')
+    return Response(gen_frames(), mimetype='multipart/x-mixed-replace; boundary=frame')
