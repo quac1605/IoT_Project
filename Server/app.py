@@ -31,7 +31,6 @@ app.register_blueprint(videoStreamBp)
 from edgesStream import edgesStreamBp
 app.register_blueprint(edgesStreamBp)
 
-CORS(app)
 #Create  GUI for namespace "/"
 @app.route('/')
 def index():
