@@ -16,5 +16,5 @@ def gen_frames_edges():
   
                
 @edgesStreamBp.route('/video_edges_feed')
-def video_feed():
+def video_edges_feed():
     return Response(gen_frames_edges(), mimetype='multipart/x-mixed-replace; boundary=frame')
