@@ -10,11 +10,6 @@ import Control as ctrl
 
 app = Flask(__name__)
 cors = CORS(app)
-cors = CORS(app, resource={
-    r"/*":{
-        "origins":"*"
-    }
-})
 app.config['CORS_HEADERS'] = 'Content-Type'
 #for socket
 socketio = SocketIO(app, async_mode='threading')
@@ -41,10 +36,9 @@ app.register_blueprint(edgesStreamBp)
 
 #Create  GUI for namespace "/"
 @app.route('/')
+@cross_origin()
 def index():
-    response = make_response(render_template('index.html',**control_values)) 
-    response.headers.add('Access-Control-Allow-Origin', '*')
-    return response
+    return render_template('index.html',**control_values)
   
 #Try to catch connect signal from namespace "/control"
 @socketio.on('connect', namespace='/control')
