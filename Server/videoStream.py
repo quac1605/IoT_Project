@@ -30,9 +30,8 @@ def gen_frames():
     global frame
     while True:
     # Su dung OpenCV cua Khanh o day de return ra angle
-        frame = pi_camera.get_frame()
         yield (b'--frame\r\n'
-                b'Content-Type: image/jpeg\r\n\r\n' + open('video_image.jpg', 'rb').read() + b'\r\n\r\n')
+                b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
                
 @videoStreamBp.route('/video_edges_feed')
 def video_edges_feed():
