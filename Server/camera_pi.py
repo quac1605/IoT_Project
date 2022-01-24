@@ -42,13 +42,17 @@ class VideoCamera(object):
                 auto_values['angle'] = auto_values['angle'] + 4
             elif (combine_value['angle'] < -65 and (combine_value['angle'] - (auto_values['angle']/1.2) <= -8) and auto_values['angle'] >= -100):
                 auto_values['angle'] = auto_values['angle'] - 4
-            elif (combine_value['angle'] >= 55 and (combine_value['angle']*1.36 - (auto_values['angle']) >= 3) and auto_values['angle'] <= 100):
+            elif (combine_value['angle'] >= 55 and (combine_value['angle']*1.26 - (auto_values['angle']) >= 3) and auto_values['angle'] <= 100):
                 auto_values['angle'] = auto_values['angle'] + 4
-            elif (combine_value['angle'] <= -55 and (combine_value['angle']*1.36 - (auto_values['angle']) <= -3) and auto_values['angle'] >= -100):
+            elif (combine_value['angle'] <= -55 and (combine_value['angle']*1.26 - (auto_values['angle']) <= -3) and auto_values['angle'] >= -100):
                 auto_values['angle'] = auto_values['angle'] - 4
-            elif ((combine_value['angle']*1.1 - (auto_values['angle']) >= 2) and auto_values['angle'] <= 100):
+            elif (combine_value['angle'] >= 35 and (combine_value['angle']*1.16 - (auto_values['angle']) >= 3) and auto_values['angle'] <= 100):
                 auto_values['angle'] = auto_values['angle'] + 4
-            elif ((combine_value['angle']*1.1 - (auto_values['angle']) <= -2) and auto_values['angle'] >= -100):
+            elif (combine_value['angle'] <= -35 and (combine_value['angle']*1.16 - (auto_values['angle']) <= -3) and auto_values['angle'] >= -100):
+                auto_values['angle'] = auto_values['angle'] - 4
+            elif (auto_values['angle'] <= 0):
+                auto_values['angle'] = auto_values['angle'] + 4
+            elif (auto_values['angle'] > 0):
                 auto_values['angle'] = auto_values['angle'] - 4
         elif(combine_value['lane_number'] == 1):
             if ((combine_value['angle'] >= 75) and auto_values['angle'] <= 100):
