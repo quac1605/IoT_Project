@@ -13,7 +13,6 @@ import math
 
 
 def detect_lane(frame):
-	#frame = cv2.imread(frame_url)
 	edges = Detection_Edges.detection_edges(frame)
 	cropped_edges = Cutting_Image.cutting_image(edges)
 	line_segments = Detect_Line_Segment.detect_line_segments(cropped_edges)

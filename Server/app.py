@@ -68,7 +68,6 @@ def thread1(threadname, val):
             OnchangedValue(control_values,auto_values,socketio)
             control_values['angle'] = auto_values['angle']
             control_values['speed'] = auto_values['speed']
-
             #print('auto set angle = ',auto_values['angle'], 'auto set speed = ', auto_values['speed'])    
         ctrl.speed(int(control_values['speed']))
         ctrl.grad(int(control_values['angle']))      
