@@ -11,7 +11,7 @@ import Control as ctrl
 app = Flask(__name__)
 app.config['CORS_HEADERS'] = 'Content-Type'
 
-cors = CORS(app, resources={r"/foo": {"origins": "http://192.168.8.21:5000"}})
+CORS(app)
 #for socket
 socketio = SocketIO(app, async_mode='threading')
 #thread = None
@@ -40,18 +40,20 @@ app.register_blueprint(edgesStreamBp)
 #Create  GUI for namespace "/"
 
 @app.route('/')
-@cross_origin(origin='http://192.168.8.21:5000',headers=['Content- Type','Authorization'])
+@cross_origin()
 def index():
     return render_template('index.html',**control_values)
   
 #Try to catch connect signal from namespace "/control"
 @socketio.on('connect', namespace='/control')
+@cross_origin()
 def test_connect():
     print('client connected')
     emit('after connect',  {'data':'Lets dance'}, namespace='/control')
 
 #Catch control value throw socket io in "/control", use this to set shared values to control Car and tell the User that value changed successfully 
 @socketio.on('Value changed', namespace='/control')
+@cross_origin()
 def value_changed(message):
     global control_values
     control_values[message['who']] = message['data']
