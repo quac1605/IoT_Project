@@ -35,12 +35,12 @@ def detect_lane(frame):
 		if ((first_lane_line[2] - first_lane_line[0] < -750) or (first_lane_line[2] - first_lane_line[0] > 750)):
 			x_offset = second_lane_line[2] - second_lane_line[0]
 			y_offset = second_lane_line[3] - second_lane_line[1]
-			y_offset = y_offset / abs(y_offset) * height * 0.35
+			#y_offset = y_offset / abs(y_offset) * height * 0.35
 			angle_to_mid_line = -(math.atan(x_offset/y_offset) * 180 / math.pi)
 		elif ((second_lane_line[2] - second_lane_line[0] < -750) or (second_lane_line[2] - second_lane_line[0] > 750)):
 			x_offset = first_lane_line[2] - first_lane_line[0]
 			y_offset = first_lane_line[3] - first_lane_line[1]
-			y_offset = y_offset / abs(y_offset) * height * 0.35
+			#y_offset = y_offset / abs(y_offset) * height * 0.35
 			angle_to_mid_line = -(math.atan(x_offset/y_offset) * 180 / math.pi)
 		else:			
 			start_mid_line = [int((first_lane_line[0]+second_lane_line[0])/2),int((first_lane_line[1]+second_lane_line[1])/2)] #lam sao de su dung float
@@ -64,7 +64,7 @@ def detect_lane(frame):
 		print(first_lane_line)
 		x_offset = first_lane_line[2] - first_lane_line[0]
 		y_offset = first_lane_line[3] - first_lane_line[1]
-		y_offset = y_offset / abs(y_offset) * height * 0.35
+		#y_offset = y_offset / abs(y_offset) * height * 0.35
 		angle_to_mid_line = -(math.atan(x_offset/y_offset) * 180 / math.pi)
 		#fking crashing avoid
 		if (x_offset <  -750 or x_offset > 750):
