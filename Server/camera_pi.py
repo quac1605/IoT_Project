@@ -39,27 +39,27 @@ class VideoCamera(object):
 
         if(combine_value['lane_number'] == 2):
             if (combine_value['angle'] > 55 and (combine_value['angle'] - (auto_values['angle']/1.5) >= 10) and auto_values['angle'] <= 100):
-                auto_values['angle'] = auto_values['angle'] + 5
+                auto_values['angle'] = auto_values['angle'] + 4
             elif (combine_value['angle'] < -55 and (combine_value['angle'] - (auto_values['angle']/1.5) <= -10) and auto_values['angle'] >= -100):
-                auto_values['angle'] = auto_values['angle'] - 5
+                auto_values['angle'] = auto_values['angle'] - 4
             elif ((combine_value['angle'] - (auto_values['angle']) >= 5) and auto_values['angle'] <= 100):
-                auto_values['angle'] = auto_values['angle'] + 5
+                auto_values['angle'] = auto_values['angle'] + 4
             elif ((combine_value['angle'] - (auto_values['angle']) <= -5) and auto_values['angle'] >= -100):
-                auto_values['angle'] = auto_values['angle'] - 5
+                auto_values['angle'] = auto_values['angle'] - 4
         elif(combine_value['lane_number'] == 1):
             if ((combine_value['angle'] >= 50) and auto_values['angle'] <= 100):
-                auto_values['angle'] = auto_values['angle'] + 5
+                auto_values['angle'] = auto_values['angle'] + 2
             elif ((combine_value['angle'] <= -50) and auto_values['angle'] >= -100):
-                auto_values['angle'] = auto_values['angle'] - 5
+                auto_values['angle'] = auto_values['angle'] - 2
             elif ((auto_values['angle'] >= 0)):
-                auto_values['angle'] = auto_values['angle'] - 5
+                auto_values['angle'] = auto_values['angle'] - 2
             elif ((auto_values['angle'] < 0)):
-                auto_values['angle'] = auto_values['angle'] + 5
+                auto_values['angle'] = auto_values['angle'] + 2
         elif(combine_value['lane_number'] == 0):
             if ((auto_values['angle'] >= 0)):
-                auto_values['angle'] = auto_values['angle'] - 5
+                auto_values['angle'] = auto_values['angle'] - 4
             elif ((auto_values['angle'] < 0)):
-                auto_values['angle'] = auto_values['angle'] + 5
+                auto_values['angle'] = auto_values['angle'] + 4
 
         old_value = combine_value['angle']
         
