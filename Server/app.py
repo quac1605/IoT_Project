@@ -34,7 +34,7 @@ app.register_blueprint(edgesStreamBp)
 #Create  GUI for namespace "/"
 @app.route('/')
 def index():
-    response = make_response(render_template('index.html',**control_values),foo = 42)
+    response = make_response(render_template('index.html',**control_values,foo = 42))
     response.headers.add('Access-Control-Allow-Origin', '*')
     return response
   
