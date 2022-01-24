@@ -1,5 +1,6 @@
 from flask import Flask, render_template, Response, request
 from flask_socketio import SocketIO, emit
+from flask_cors import CORS
 from time import sleep
 from threading import Thread, Lock
 import sys
@@ -8,6 +9,7 @@ sys.path.insert(0, "..//Modul//Motor_Control")
 import Control as ctrl
 
 app = Flask(__name__)
+CORS(app)
 #for socket
 socketio = SocketIO(app, async_mode='threading')
 #thread = None
