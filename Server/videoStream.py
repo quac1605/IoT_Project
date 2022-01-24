@@ -15,7 +15,7 @@ from camera_pi import VideoCamera
 pi_camera = VideoCamera(flip=False)
 # Raspberry Pi camera module (requires picamera package)
 '''
-def gen_frames_edges(camera):  
+def gen_frames_edges():  
     # get camera frame and public to global
 
     while True:
