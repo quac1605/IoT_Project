@@ -25,17 +25,19 @@ control_values = {
 from camera_pi import auto_values
 
 
-
+'''
 #Add Streaming Video to this Web throw Blueprint
 from videoStream import videoStreamBp
 app.register_blueprint(videoStreamBp)
+'''
+
 '''
 from edgesStream import edgesStreamBp
 app.register_blueprint(edgesStreamBp)
 '''
 #Create  GUI for namespace "/"
 CORS(app)
-app.config['CORS_HEADERS'] = 'Content-Type'
+
 @app.route('/')
 def index():
     return render_template('index.html',**control_values)
