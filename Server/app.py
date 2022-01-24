@@ -1,6 +1,6 @@
 from flask import Flask, render_template, Response, request
 from flask_socketio import SocketIO, emit
-from flask.ext.cors import CORS, cross_origin
+from flask_cors import CORS,cross_origin
 from time import sleep
 from threading import Thread, Lock
 import sys
