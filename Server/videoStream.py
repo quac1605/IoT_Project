@@ -26,6 +26,5 @@ def gen_frames(camera):
   
                
 @videoStreamBp.route('/video_feed')
-@cross_origin()
 def video_feed():
     return Response(gen_frames(pi_camera), mimetype='multipart/x-mixed-replace; boundary=frame')
