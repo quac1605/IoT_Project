@@ -54,7 +54,7 @@ def detect_lane(frame):
 			#caculate angle
 			x_offset = end_mid_line[0] - start_mid_line[0]
 			y_offset = end_mid_line[1] - start_mid_line[1]
-			y_offset = y_offset / abs(y_offset) * height * 0.35
+			#y_offset = y_offset / abs(y_offset) * height * 0.35
 			angle_to_mid_line = -(math.atan(x_offset/y_offset) * 180 / math.pi)
 	elif (len(lane_lines) == 1):
 		speed_set = 45
