@@ -6,7 +6,7 @@ import sys
 
 edgesStreamBp = Blueprint('video_edges_feed', __name__)
 # Raspberry Pi camera module (requires picamera package)
-frame = cv2.imread('video_image_edges.jpg')
+from videoStream import frame
 
 def gen_frames_edges():  
     # get camera frame and public to global
