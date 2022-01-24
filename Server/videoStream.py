@@ -10,7 +10,7 @@ CORS(videoStreamBp)
 
 from camera_pi import VideoCamera
 pi_camera = VideoCamera(flip=False)
-frame = pi_camera.get_frame()
+frame = cv2.imread('video_image.jpg');
 #avoid crash
 
 
