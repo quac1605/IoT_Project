@@ -96,6 +96,13 @@
 			}
 		});
 	</script>
+	<style>
+		.form-control-range{
+			width: 10%;
+  			margin:0 auto;
+  			text-align: center;
+		}
+		</style>
 </head>
 
 <body>
@@ -106,15 +113,15 @@
 		<form class="mt-5">
 			<div class="form-group">
 				<label for="formControl">Speed</label>
-				<input type="text" class="form-control-range sync" id="speed" value={{speed}} size=8" readonly>
+				<input type="text" class="form-control-range" id="speed" value={{speed}} readonly>
 			</div>
 			<div class="form-group">
 				<label for="formControl">Angle</label>
-				<input type="text" class="form-control-range sync" id="angle" value={{angle}} size="8" readonly>
+				<input type="text" class="form-control-range" id="angle" value={{angle}} readonly>
 			</div>
 			<div class="form-group">
 				<label for="formControl">Mode</label>
-				<input type="text" class="form-control-range sync" id="mode" value={{mode}}  size="8" readonly>
+				<input type="text" class="form-control-range" id="mode" value={{mode}} readonly>
 			</div>
 		</form>
 	</div>

@@ -24,7 +24,8 @@ control_values = {
     'angle': 0,
     'mode':'manuell'
 }
-from camera_pi import auto_values
+from camera_pi import auto_values,VideoCamera
+pi_camera = VideoCamera(flip=False)
 
 
 
@@ -78,6 +79,7 @@ def thread1(threadname, val):
 thread1 = Thread( target=thread1, args=("Thread-1", control_values) )
 
 if __name__ == '__main__':
+    pi_camera.get_frame();
     thread1.start()
     socketio.run(app,host='0.0.0.0', port=5000, debug=False)
     thread1.join()
