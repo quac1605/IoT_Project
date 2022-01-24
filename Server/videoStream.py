@@ -6,8 +6,7 @@ import cv2
 import sys
 
 videoStreamBp = Blueprint('video_feed', __name__)
-cors = CORS(videoStreamBp)
-videoStreamBp.config['CORS_HEADERS'] = 'Content-Type'
+CORS(videoStreamBp)
 
 #avoid crash
 frame = cv2.imread('video_image.jpg')
