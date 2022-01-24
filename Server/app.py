@@ -25,11 +25,11 @@ control_values = {
 from camera_pi import auto_values
 
 
-'''
+
 #Add Streaming Video to this Web throw Blueprint
 from videoStream import videoStreamBp
 app.register_blueprint(videoStreamBp)
-'''
+
 
 '''
 from edgesStream import edgesStreamBp
@@ -61,14 +61,14 @@ def thread1(threadname, val):
     #read variable "a" modify by thread 2
     global control_values
     global auto_values
-    global socketio
+    #global socketio
     while True:
         #auto mode
         if (control_values['mode'] == 'auto'):
             ctrl.speed(int(auto_values['speed']))
             ctrl.grad(int(auto_values['angle']))
-            socketio.emit('Sever updated value', { 'who': 'speed', 'data': auto_values['speed'] }, broadcast=True, namespace='/control')
-            socketio.emit('Sever updated value', { 'who': 'angle', 'data': auto_values['angle'] }, broadcast=True, namespace='/control')
+            #socketio.emit('Sever updated value', { 'who': 'speed', 'data': auto_values['speed'] }, broadcast=True, namespace='/control')
+            #socketio.emit('Sever updated value', { 'who': 'angle', 'data': auto_values['angle'] }, broadcast=True, namespace='/control')
             #print('auto set angle = ',auto_values['angle'], 'auto set speed = ', auto_values['speed'])
         #code for manuell
         elif (control_values['mode'] == 'manuell'):
