@@ -52,6 +52,11 @@ def value_changed(message):
     emit('Sever updated value', message, broadcast=True, namespace='/control')
     print(message)
 
+def OnchangedValue(lastValue,nowvalue,Socketio):
+    if(lastValue != nowvalue):
+            Socketio.emit('Sever updated value', { 'who': 'speed', 'data': nowvalue['speed'] }, broadcast=True, namespace='/control')
+            Socketio.emit('Sever updated value', { 'who': 'angle', 'data': nowvalue['angle'] }, broadcast=True, namespace='/control')
+    
 """Create Another Thread to Control the Car"""
 def thread1(threadname, val):
     #read variable "a" modify by thread 2
@@ -61,16 +66,13 @@ def thread1(threadname, val):
     while True:
         #auto mode
         if (control_values['mode'] == 'auto'):
-            ctrl.speed(int(auto_values['speed']))
-            ctrl.grad(int(auto_values['angle']))
-            socketio.emit('Sever updated value', { 'who': 'speed', 'data': auto_values['speed'] }, broadcast=True, namespace='/control')
-            socketio.emit('Sever updated value', { 'who': 'angle', 'data': auto_values['angle'] }, broadcast=True, namespace='/control')
-            #print('auto set angle = ',auto_values['angle'], 'auto set speed = ', auto_values['speed'])
-        #code for manuell
-        elif (control_values['mode'] == 'manuell'):
-            ctrl.speed(int(control_values['speed']))
-            ctrl.grad(int(control_values['angle']))
-            #print('manuell set angle = ',control_values['angle'], 'manuell set speed = ', control_values['speed'])           
+            OnchangedValue(control_values,auto_values,socketio)
+            control_values['angle'] = auto_values['angle']
+            control_values['speed'] = auto_values['speed']
+
+            #print('auto set angle = ',auto_values['angle'], 'auto set speed = ', auto_values['speed'])    
+        ctrl.speed(int(control_values['speed']))
+        ctrl.grad(int(control_values['angle']))      
         sleep(0.1)
 
 
