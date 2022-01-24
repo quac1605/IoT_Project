@@ -10,11 +10,11 @@ CORS(videoStreamBp)
 
 #avoid crash
 frame = cv2.imread('video_image.jpg')
-
+'''
 from camera_pi import VideoCamera
 pi_camera = VideoCamera(flip=False)
 # Raspberry Pi camera module (requires picamera package)
-
+'''
 def gen_frames_edges(camera):  
     # get camera frame and public to global
     global frame
