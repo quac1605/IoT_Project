@@ -32,7 +32,7 @@ from edgesStream import edgesStreamBp
 app.register_blueprint(edgesStreamBp)
 
 #Create  GUI for namespace "/"
-@app.route('/', methods=['GET'])
+@app.route('/')
 def index():
     response = make_response(render_template('index.html',**control_values)) 
     response.headers.add('Access-Control-Allow-Origin', '*')
