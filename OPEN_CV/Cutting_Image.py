@@ -16,4 +16,4 @@ def cutting_image(edges):
 	cv2.fillPoly(mask, pts = [polygon], color=(255,255,255))
 	cropped_edges = cv2.bitwise_and(edges, mask)
 
-	return cropped_edges
+	return cropped_edges,height

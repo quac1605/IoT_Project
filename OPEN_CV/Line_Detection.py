@@ -14,7 +14,7 @@ import math
 
 def detect_lane(frame):
 	edges = Detection_Edges.detection_edges(frame)
-	cropped_edges = Cutting_Image.cutting_image(edges)
+	cropped_edges,height = Cutting_Image.cutting_image(edges)
 	line_segments = Detect_Line_Segment.detect_line_segments(cropped_edges)
 	lane_lines = Combine_Line_Segments.average_slope_intercept(frame, line_segments)
 	cv2.imwrite('video_image_edges.jpg', cropped_edges)
@@ -34,7 +34,8 @@ def detect_lane(frame):
 			lane_number = 2;
 		if ((first_lane_line[2] - first_lane_line[0] < -750) or (first_lane_line[2] - first_lane_line[0] > 750)):
 			x_offset = second_lane_line[2] - second_lane_line[0]
-			y_offset = second_lane_line[3] - second_lane_line[1]
+			#y_offset = second_lane_line[3] - second_lane_line[1]
+			y_offset=height*0.35
 			angle_to_mid_line = -(math.atan(x_offset/y_offset) * 180 / math.pi)
 		elif ((second_lane_line[2] - second_lane_line[0] < -750) or (second_lane_line[2] - second_lane_line[0] > 750)):
 			x_offset = first_lane_line[2] - first_lane_line[0]
@@ -51,7 +52,8 @@ def detect_lane(frame):
 			'''
 			#caculate angle
 			x_offset = end_mid_line[0] - start_mid_line[0]
-			y_offset = end_mid_line[1] - start_mid_line[1]
+			#y_offset = end_mid_line[1] - start_mid_line[1]
+			y_offset = height * 0.35
 			angle_to_mid_line = -(math.atan(x_offset/y_offset) * 180 / math.pi)
 	elif (len(lane_lines) == 1):
 		speed_set = 45
@@ -60,7 +62,8 @@ def detect_lane(frame):
 		print('only lane detected ')
 		print(first_lane_line)
 		x_offset = first_lane_line[2] - first_lane_line[0]
-		y_offset = first_lane_line[3] - first_lane_line[1]
+		#y_offset = first_lane_line[3] - first_lane_line[1]
+		y_offset = height * 0.35
 		angle_to_mid_line = -(math.atan(x_offset/y_offset) * 180 / math.pi)
 		#fking crashing avoid
 		if (x_offset <  -750 or x_offset > 750):
