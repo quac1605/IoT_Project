@@ -59,9 +59,9 @@ class VideoCamera(object):
                 auto_values['angle'] = auto_values['angle'] + 8
             elif ((combine_value['angle'] <= -75) and auto_values['angle'] >= -100):
                 auto_values['angle'] = auto_values['angle'] - 8
-            elif (combine_value['angle'] >= 55 and (combine_value['angle']*1.2 - (auto_values['angle']) >= 3) and auto_values['angle'] <= 100):
+            elif (combine_value['angle'] >= 55 and (combine_value['angle']*1.26 - (auto_values['angle']) >= 3) and auto_values['angle'] <= 100):
                 auto_values['angle'] = auto_values['angle'] + 8
-            elif (combine_value['angle'] <= -55 and (combine_value['angle']*1.2 - (auto_values['angle']) <= -3) and auto_values['angle'] >= -100):
+            elif (combine_value['angle'] <= -55 and (combine_value['angle']*1.26 - (auto_values['angle']) <= -3) and auto_values['angle'] >= -100):
                 auto_values['angle'] = auto_values['angle'] - 8
             elif (combine_value['angle'] >= 25 and (combine_value['angle']*1.16 - (auto_values['angle']) >= 3) and auto_values['angle'] <= 100):
                 auto_values['angle'] = auto_values['angle'] + 8
