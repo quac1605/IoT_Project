@@ -6,9 +6,11 @@ import sys
 
 edgesStreamBp = Blueprint('video_edges_feed', __name__)
 # Raspberry Pi camera module (requires picamera package)
+frame = cv2.imread('video_image_edges.jpg')
 
 def gen_frames_edges():  
     # get camera frame and public to global
+    global frame
     while True:
     # Su dung OpenCV cua Khanh o day de return ra angle
         yield (b'--frame\r\n'
