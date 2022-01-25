@@ -11,7 +11,7 @@ auto_values = {
     'speed': 0,
     'angle': 0,
 }
-
+check_side = 0;
 old_value = 0
 class VideoCamera(object):
     global auto_values
@@ -31,12 +31,13 @@ class VideoCamera(object):
 
     def get_frame(self):
         global old_value
+        global check_side
         frame = self.flip_if_needed(self.vs.read())
         ret, jpeg = cv2.imencode('.jpg', frame)
         combine_value = detect_lane(frame)
         print('combine_value ', combine_value['angle'], 'old_value', old_value, 'angle', auto_values['angle'])
         auto_values['speed'] = combine_value['speed']
-        check_side = 0;
+
         if(check_side == 0):
             auto_values['speed'] = 46
             check_side = 1
