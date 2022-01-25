@@ -83,7 +83,7 @@ class VideoCamera(object):
                 auto_values['speed'] = 40
                 auto_values['angle'] = -auto_values['angle']
                 check_side = 1
-                sleep(200)
+                sleep(50)
             else:
                 auto_values['speed'] = 0
                 auto_values['angle'] = 0
