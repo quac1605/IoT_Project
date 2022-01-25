@@ -16,7 +16,6 @@
 
 			// An event handler for a change of value 
 			$('input.sync').on('input', function (event) {
-				console.log("da thay doi")
 				socket.emit('Value changed', { who: $(this).attr('id'), data: $(this).val() });
 				socket_ip.emit('Value changed', { who: $(this).attr('id'), data: $(this).val() });
 				return false;
