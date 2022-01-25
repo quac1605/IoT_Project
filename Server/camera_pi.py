@@ -64,36 +64,28 @@ class VideoCamera(object):
                 auto_values['angle'] = auto_values['angle'] - 4
             old_laneline = 2
         elif(combine_value['lane_number'] == 1):
-            if (old_laneline == 2 and check_side < 10 and (auto_values['angle'] > 35) or (auto_values['angle'] < -35)):
-                if (check_side == 0):
-                    auto_values['angle'] = -auto_values['angle']
-                    check_side = check_side + 1
-                else:
-                    auto_values['angle'] = -auto_values['angle']
-                    check_side = check_side + 1
-            else:
-                check_side = 0
-                old_laneline = 0
-                if ((combine_value['angle'] >= 80) and auto_values['angle'] <= 100):
-                    auto_values['angle'] = auto_values['angle'] + 8
-                elif ((combine_value['angle'] <= -80) and auto_values['angle'] >= -100):
-                    auto_values['angle'] = auto_values['angle'] - 8
-                elif (combine_value['angle'] >= 60 and (combine_value['angle']*1.33 - (auto_values['angle']) >= 5) and auto_values['angle'] <= 100):
-                    auto_values['angle'] = auto_values['angle'] + 8
-                elif (combine_value['angle'] <= -60 and (combine_value['angle']*1.33 - (auto_values['angle']) <= -5) and auto_values['angle'] >= -100):
-                    auto_values['angle'] = auto_values['angle'] - 8
-                elif (combine_value['angle'] >= 48 and (combine_value['angle']*1.26 - (auto_values['angle']) >= 5) and auto_values['angle'] <= 100):
-                    auto_values['angle'] = auto_values['angle'] + 8
-                elif (combine_value['angle'] <= -48 and (combine_value['angle']*1.26 - (auto_values['angle']) <= -5) and auto_values['angle'] >= -100):
-                    auto_values['angle'] = auto_values['angle'] - 8
-                elif (combine_value['angle'] >= 25 and (combine_value['angle']*1.23 - (auto_values['angle']) >= 5) and auto_values['angle'] <= 100):
-                    auto_values['angle'] = auto_values['angle'] + 4
-                elif (combine_value['angle'] <= -25 and (combine_value['angle']*1.23 - (auto_values['angle']) <= -5) and auto_values['angle'] >= -100):
-                    auto_values['angle'] = auto_values['angle'] - 4
-                elif (auto_values['angle'] <= 0):
-                    auto_values['angle'] = auto_values['angle'] + 4
-                elif (auto_values['angle'] > 0):
-                    auto_values['angle'] = auto_values['angle'] - 4
+            check_side = 0
+            old_laneline = 0
+            if ((combine_value['angle'] >= 80) and auto_values['angle'] <= 100):
+                auto_values['angle'] = auto_values['angle'] + 8
+            elif ((combine_value['angle'] <= -80) and auto_values['angle'] >= -100):
+                auto_values['angle'] = auto_values['angle'] - 8
+            elif (combine_value['angle'] >= 60 and (combine_value['angle']*1.33 - (auto_values['angle']) >= 5) and auto_values['angle'] <= 100):
+                auto_values['angle'] = auto_values['angle'] + 8
+            elif (combine_value['angle'] <= -60 and (combine_value['angle']*1.33 - (auto_values['angle']) <= -5) and auto_values['angle'] >= -100):
+                auto_values['angle'] = auto_values['angle'] - 8
+            elif (combine_value['angle'] >= 48 and (combine_value['angle']*1.26 - (auto_values['angle']) >= 5) and auto_values['angle'] <= 100):
+                auto_values['angle'] = auto_values['angle'] + 8
+            elif (combine_value['angle'] <= -48 and (combine_value['angle']*1.26 - (auto_values['angle']) <= -5) and auto_values['angle'] >= -100):
+                auto_values['angle'] = auto_values['angle'] - 8
+            elif (combine_value['angle'] >= 25 and (combine_value['angle']*1.23 - (auto_values['angle']) >= 5) and auto_values['angle'] <= 100):
+                auto_values['angle'] = auto_values['angle'] + 4
+            elif (combine_value['angle'] <= -25 and (combine_value['angle']*1.23 - (auto_values['angle']) <= -5) and auto_values['angle'] >= -100):
+                auto_values['angle'] = auto_values['angle'] - 4
+            elif (auto_values['angle'] <= 0):
+                auto_values['angle'] = auto_values['angle'] + 4
+            elif (auto_values['angle'] > 0):
+                auto_values['angle'] = auto_values['angle'] - 4
             old_laneline = 1
         elif(combine_value['lane_number'] == 0):
             if (old_laneline == 1 and check_side < 500 and (auto_values['angle'] > 35) or (auto_values['angle'] < -35)):
