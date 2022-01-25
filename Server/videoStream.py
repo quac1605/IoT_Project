@@ -25,7 +25,7 @@ def gen_frames_edges():
     # Su dung OpenCV cua Khanh o day de return ra angle
         frame = pi_camera.get_frame()
         yield (b'--frame\r\n'
-                b'Content-Type: image/jpeg\r\n\r\n' + open('imrgb.jpg', 'rb').read() + b'\r\n\r\n')
+                b'Content-Type: image/jpeg\r\n\r\n' + open('cut_edges.jpg', 'rb').read() + b'\r\n\r\n')
 
 def gen_frames():  
     # get camera frame and public to global
@@ -34,7 +34,7 @@ def gen_frames():
     while True:
     # Su dung OpenCV cua Khanh o day de return ra angle
         yield (b'--frame\r\n'
-                b'Content-Type: image/jpeg\r\n\r\n' + open('cut_edges.jpg', 'rb').read() + b'\r\n\r\n')
+                b'Content-Type: image/jpeg\r\n\r\n' + open('imrgb.jpg', 'rb').read() + b'\r\n\r\n')
                
 @videoStreamBp.route('/video_edges_feed')
 def video_edges_feed():
