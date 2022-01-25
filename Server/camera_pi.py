@@ -88,7 +88,7 @@ class VideoCamera(object):
             old_laneline = 1
         elif(combine_value['lane_number'] == 0):
             if ((check_side <= 68) and (auto_values['angle'] > 35) or (auto_values['angle'] < -35)):
-                #auto_values['speed'] = 38
+                auto_values['speed'] = 35
                 auto_values['angle'] = -auto_values['angle']
                 check_side = check_side + 1
             else:
