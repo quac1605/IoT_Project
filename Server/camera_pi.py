@@ -93,7 +93,6 @@ class VideoCamera(object):
                 check_side = check_side + 1
             else:
                 auto_values['speed'] = 0
-                auto_values['angle'] = 0
             old_laneline = 0
 
         old_value = combine_value['angle']
