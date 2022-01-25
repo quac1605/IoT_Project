@@ -78,7 +78,7 @@ class VideoCamera(object):
         elif(combine_value['lane_number'] == 0):
             if ((auto_values['angle'] > 35) or (auto_values['angle'] < -35)):
                 auto_values['angle'] = -auto_values['angle']
-            elif ():
+            else:
                 auto_values['angle'] = 0
 
         old_value = combine_value['angle']
