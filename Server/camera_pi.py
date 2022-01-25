@@ -69,6 +69,7 @@ class VideoCamera(object):
                     auto_values['angle'] = -auto_values['angle']
                     check_side = check_side + 1
                 else:
+                    auto_values['angle'] = -auto_values['angle']
                     check_side = check_side + 1
             else:
                 check_side = 0
