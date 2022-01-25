@@ -11,7 +11,8 @@ auto_values = {
     'speed': 0,
     'angle': 0,
 }
-check_side = 0;
+check_side = 0
+old_laneline = 0
 old_value = 0
 class VideoCamera(object):
     global auto_values
@@ -32,6 +33,7 @@ class VideoCamera(object):
     def get_frame(self):
         global old_value
         global check_side
+        global old_laneline
         frame = self.flip_if_needed(self.vs.read())
         ret, jpeg = cv2.imencode('.jpg', frame)
         combine_value = detect_lane(frame)
@@ -44,22 +46,23 @@ class VideoCamera(object):
                 auto_values['angle'] = auto_values['angle'] + 8
             elif (combine_value['angle'] < -77 and (combine_value['angle'] - (auto_values['angle']/1.2) <= -8) and auto_values['angle'] >= -100):
                 auto_values['angle'] = auto_values['angle'] - 8
-            elif (combine_value['angle'] >= 65 and (combine_value['angle']*1.1 - (auto_values['angle']) >= 5) and auto_values['angle'] <= 100):
+            elif (combine_value['angle'] >= 65 and (combine_value['angle']*1.2 - (auto_values['angle']) >= 5) and auto_values['angle'] <= 100):
                 auto_values['angle'] = auto_values['angle'] + 8
-            elif (combine_value['angle'] <= -65 and (combine_value['angle']*1.1 - (auto_values['angle']) <= -5) and auto_values['angle'] >= -100):
+            elif (combine_value['angle'] <= -65 and (combine_value['angle']*1.2 - (auto_values['angle']) <= -5) and auto_values['angle'] >= -100):
                 auto_values['angle'] = auto_values['angle'] - 8
-            elif (combine_value['angle'] >= 45 and (combine_value['angle']*1 - (auto_values['angle']) >= 5) and auto_values['angle'] <= 100):
-                auto_values['angle'] = auto_values['angle'] + 4
-            elif (combine_value['angle'] <= -45 and (combine_value['angle']*1 - (auto_values['angle']) <= -5) and auto_values['angle'] >= -100):
-                auto_values['angle'] = auto_values['angle'] - 4
-            elif (combine_value['angle'] >= 25 and (combine_value['angle']*0.6 - (auto_values['angle']) >= 5) and auto_values['angle'] <= 100):
-                auto_values['angle'] = auto_values['angle'] + 4
-            elif (combine_value['angle'] <= -25 and (combine_value['angle']*0.6 - (auto_values['angle']) <= -5) and auto_values['angle'] >= -100):
+            elif (combine_value['angle'] >= 45 and (combine_value['angle']*1.15 - (auto_values['angle']) >= 5) and auto_values['angle'] <= 100):
+                auto_values['angle'] = auto_values['angle'] + 8
+            elif (combine_value['angle'] <= -45 and (combine_value['angle']*1.15 - (auto_values['angle']) <= -5) and auto_values['angle'] >= -100):
+                auto_values['angle'] = auto_values['angle'] - 8
+            elif (combine_value['angle'] >= 25 and (combine_value['angle']*1.1 - (auto_values['angle']) >= 5) and auto_values['angle'] <= 100):
+                auto_values['angle'] = auto_values['angle'] + 8
+            elif (combine_value['angle'] <= -25 and (combine_value['angle']*1.1 - (auto_values['angle']) <= -5) and auto_values['angle'] >= -100):
                 auto_values['angle'] = auto_values['angle'] - 4
             elif (auto_values['angle'] <= 0):
                 auto_values['angle'] = auto_values['angle'] + 4
             elif (auto_values['angle'] > 0):
                 auto_values['angle'] = auto_values['angle'] - 4
+            old_laneline = 2
         elif(combine_value['lane_number'] == 1):
             check_side = 0
             if ((combine_value['angle'] >= 80) and auto_values['angle'] <= 100):
@@ -82,6 +85,7 @@ class VideoCamera(object):
                 auto_values['angle'] = auto_values['angle'] + 4
             elif (auto_values['angle'] > 0):
                 auto_values['angle'] = auto_values['angle'] - 4
+            old_laneline = 1
         elif(combine_value['lane_number'] == 0):
             if ((check_side <= 68) and (auto_values['angle'] > 35) or (auto_values['angle'] < -35)):
                 #auto_values['speed'] = 38
@@ -90,6 +94,7 @@ class VideoCamera(object):
             else:
                 auto_values['speed'] = 0
                 auto_values['angle'] = 0
+            old_laneline = 0
 
         old_value = combine_value['angle']
         
