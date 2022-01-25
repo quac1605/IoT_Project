@@ -36,8 +36,10 @@ class VideoCamera(object):
         combine_value = detect_lane(frame)
         print('combine_value ', combine_value['angle'], 'old_value', old_value, 'angle', auto_values['angle'])
         auto_values['speed'] = combine_value['speed']
+        check_side = 0;
 
         if(combine_value['lane_number'] == 2):
+            check_side = 0;
             if (combine_value['angle'] > 77 and (combine_value['angle'] - (auto_values['angle']/1.2) >= 8) and auto_values['angle'] <= 100):
                 auto_values['angle'] = auto_values['angle'] + 8
             elif (combine_value['angle'] < -77 and (combine_value['angle'] - (auto_values['angle']/1.2) <= -8) and auto_values['angle'] >= -100):
@@ -55,6 +57,7 @@ class VideoCamera(object):
             elif (auto_values['angle'] > 0):
                 auto_values['angle'] = auto_values['angle'] - 4
         elif(combine_value['lane_number'] == 1):
+            check_side = 0
             if ((combine_value['angle'] >= 80) and auto_values['angle'] <= 100):
                 auto_values['angle'] = auto_values['angle'] + 8
             elif ((combine_value['angle'] <= -80) and auto_values['angle'] >= -100):
@@ -76,9 +79,12 @@ class VideoCamera(object):
             elif (auto_values['angle'] > 0):
                 auto_values['angle'] = auto_values['angle'] - 4
         elif(combine_value['lane_number'] == 0):
-            if ((auto_values['angle'] > 35) or (auto_values['angle'] < -35)):
+            if ((check_side <= 5) and (auto_values['angle'] > 35) or (auto_values['angle'] < -35)):
+                auto_values['speed'] = 40
                 auto_values['angle'] = -auto_values['angle']
+                check_side = check_side + 1
             else:
+                auto_values['speed'] = 0
                 auto_values['angle'] = 0
 
         old_value = combine_value['angle']
